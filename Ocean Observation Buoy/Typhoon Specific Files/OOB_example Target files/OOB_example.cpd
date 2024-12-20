@@ -1,0 +1,1745 @@
+
+<model_description>
+    <sw_version>2024.3</sw_version>
+    <hw_properties>
+        <revision>3</revision>
+        <product_id>HIL604</product_id>
+        <configuration_id>1</configuration_id>
+        <device_ao_limit_enable>False</device_ao_limit_enable>
+        <device_id>0</device_id>
+        <spc_out_mem_size>512</spc_out_mem_size>
+        <fw_support_limit>132646674</fw_support_limit>
+        <vhil_adio_loopback>False</vhil_adio_loopback>
+    </hw_properties>
+    <sim_setup>
+        <sim_time_step>5e-07</sim_time_step>
+    </sim_setup>
+    <pesb>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>0</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[0]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[1]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[7]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[13]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>2</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[1]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>2</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[7]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>2</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[13]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+    </pesb>
+    <analog_variables>
+        <cell>
+            <name>C - Boost Converter</name>
+            <address>0</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Boost Converter</name>
+            <address>1</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.IGBT Leg.IGBT Leg global gds ovs.v2</name>
+            <address>386</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Core Coupling 2.V_msr</name>
+            <address>456</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Boost Converter</name>
+            <address>3</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Boost Converter</name>
+            <address>2</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>S1.i</name>
+            <address>4</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.IGBT Leg.IGBT Leg global gds ovs.il</name>
+            <address>384</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Core Coupling 1.I_msr</name>
+            <address>452</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.IGBT Leg.IGBT Leg global gds ovs.v1</name>
+            <address>385</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>C - Sea-surface Buck 12V</name>
+            <address>512</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C - Sea-surface Buck 24V</name>
+            <address>513</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Sea-surface Buck 5V</name>
+            <address>517</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Sea-surface Buck 24V</name>
+            <address>516</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Sea-surface Buck 12V</name>
+            <address>515</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C - Sea-surface Buck 5V</name>
+            <address>514</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>I - Sea-surface Load 5V</name>
+            <address>525</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.v1</name>
+            <address>897</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.il</name>
+            <address>904</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.v1</name>
+            <address>913</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Switch Sea-surface 24V.i</name>
+            <address>526</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.v2</name>
+            <address>914</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.v2</name>
+            <address>898</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.il</name>
+            <address>912</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Sea-surface Load 12V</name>
+            <address>519</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Sea-surface Load 24V</name>
+            <address>520</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Core Coupling 1.V_msr</name>
+            <address>960</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Sea-surface Load 24V</name>
+            <address>524</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.v2</name>
+            <address>906</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Energy Storage</name>
+            <address>522</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.il</name>
+            <address>896</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Sea-surface Load 5V</name>
+            <address>521</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.v1</name>
+            <address>905</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Sea-surface Load 12V</name>
+            <address>523</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Energy Storage</name>
+            <address>518</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage_source</name>
+            <address>33280</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C - Seafloor Buck 5V</name>
+            <address>1026</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C - Seafloor Buck 24V</name>
+            <address>1025</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Seafloor Buck 5V</name>
+            <address>1029</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Seafloor Buck 24V</name>
+            <address>1028</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L - Seafloor Buck 12V</name>
+            <address>1027</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C - Seafloor Buck 12V</name>
+            <address>1024</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.il</name>
+            <address>1408</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.v2</name>
+            <address>1410</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.v2</name>
+            <address>1418</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Seafloor Load 24V</name>
+            <address>1034</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>S3.i</name>
+            <address>1036</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.v2</name>
+            <address>1426</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.v1</name>
+            <address>1409</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Seafloor Load 24V</name>
+            <address>1031</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.v1</name>
+            <address>1425</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.v1</name>
+            <address>1417</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Seafloor Load 5V</name>
+            <address>1035</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Seafloor Load 5V</name>
+            <address>1032</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I - Seafloor Load 12V</name>
+            <address>1033</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Core Coupling 2.I_msr</name>
+            <address>1472</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.il</name>
+            <address>1416</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Voltage - Seafloor Load 12V</name>
+            <address>1030</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.il</name>
+            <address>1424</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 1</name>
+            <address>34816</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 2</name>
+            <address>34817</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 3</name>
+            <address>34818</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 4</name>
+            <address>34819</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 5</name>
+            <address>34820</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 6</name>
+            <address>34821</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 7</name>
+            <address>34822</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 8</name>
+            <address>34823</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 9</name>
+            <address>34824</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 10</name>
+            <address>34825</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 11</name>
+            <address>34826</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 12</name>
+            <address>34827</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 13</name>
+            <address>34828</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 14</name>
+            <address>34829</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 15</name>
+            <address>34830</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 16</name>
+            <address>34831</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 17</name>
+            <address>34832</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 18</name>
+            <address>34833</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 19</name>
+            <address>34834</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 20</name>
+            <address>34835</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 21</name>
+            <address>34836</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 22</name>
+            <address>34837</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 23</name>
+            <address>34838</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 24</name>
+            <address>34839</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 25</name>
+            <address>34840</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 26</name>
+            <address>34841</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 27</name>
+            <address>34842</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 28</name>
+            <address>34843</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 29</name>
+            <address>34844</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 30</name>
+            <address>34845</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 31</name>
+            <address>34846</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 32</name>
+            <address>34847</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </analog_variables>
+    <digital_variables>
+        <cell>
+            <name>const_0</name>
+            <address>1</address>
+            </cell>
+        <cell>
+            <name>HIL0 AO flag</name>
+            <address>8</address>
+            </cell>
+        <cell>
+            <name>HIL0 DTV flag</name>
+            <address>9</address>
+            </cell>
+        <cell>
+            <name>HIL0 Capture or Scope Trigger</name>
+            <address>16</address>
+                <previous_names>
+                        <previous_name>HIL0 Capture/Scope Trigger</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>HIL0 Capture/Scope Trigger</name>
+            <address>16</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 1</name>
+            <address>512</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 2</name>
+            <address>513</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 3</name>
+            <address>514</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 4</name>
+            <address>515</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 5</name>
+            <address>516</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 6</name>
+            <address>517</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 7</name>
+            <address>518</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 8</name>
+            <address>519</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 9</name>
+            <address>520</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 10</name>
+            <address>521</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 11</name>
+            <address>522</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 12</name>
+            <address>523</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 13</name>
+            <address>524</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 14</name>
+            <address>525</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 15</name>
+            <address>526</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 16</name>
+            <address>527</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 17</name>
+            <address>528</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 18</name>
+            <address>529</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 19</name>
+            <address>530</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 20</name>
+            <address>531</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 21</name>
+            <address>532</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 22</name>
+            <address>533</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 23</name>
+            <address>534</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 24</name>
+            <address>535</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 25</name>
+            <address>536</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 26</name>
+            <address>537</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 27</name>
+            <address>538</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 28</name>
+            <address>539</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 29</name>
+            <address>540</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 30</name>
+            <address>541</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 31</name>
+            <address>542</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 32</name>
+            <address>543</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 33</name>
+            <address>544</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 34</name>
+            <address>545</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 35</name>
+            <address>546</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 36</name>
+            <address>547</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 37</name>
+            <address>548</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 38</name>
+            <address>549</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 39</name>
+            <address>550</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 40</name>
+            <address>551</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 41</name>
+            <address>552</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 42</name>
+            <address>553</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 43</name>
+            <address>554</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 44</name>
+            <address>555</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 45</name>
+            <address>556</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 46</name>
+            <address>557</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 47</name>
+            <address>558</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 48</name>
+            <address>559</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 49</name>
+            <address>560</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 50</name>
+            <address>561</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 51</name>
+            <address>562</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 52</name>
+            <address>563</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 53</name>
+            <address>564</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 54</name>
+            <address>565</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 55</name>
+            <address>566</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 56</name>
+            <address>567</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 57</name>
+            <address>568</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 58</name>
+            <address>569</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 59</name>
+            <address>570</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 60</name>
+            <address>571</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 61</name>
+            <address>572</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 62</name>
+            <address>573</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 63</name>
+            <address>574</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 64</name>
+            <address>575</address>
+            </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.S1</name>
+            <address>780</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.S1</name>
+            <address>768</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.S1</name>
+            <address>770</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.S1</name>
+            <address>772</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.S1</name>
+            <address>774</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.S1</name>
+            <address>776</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.S1</name>
+            <address>778</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.PWM_Modulator.TOP_1</name>
+            <address>774</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 12V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.PWM_Modulator_TOP_1</name>
+            <address>774</address>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.PWM_Modulator.BOT_1</name>
+            <address>775</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 12V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 12V.PWM_Modulator_BOT_1</name>
+            <address>775</address>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.PWM_Modulator.TOP_1</name>
+            <address>776</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 24V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.PWM_Modulator_TOP_1</name>
+            <address>776</address>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.PWM_Modulator.BOT_1</name>
+            <address>777</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 24V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 24V.PWM_Modulator_BOT_1</name>
+            <address>777</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.PWM_Modulator.TOP_1</name>
+            <address>772</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 5V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.PWM_Modulator_TOP_1</name>
+            <address>772</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.PWM_Modulator.BOT_1</name>
+            <address>773</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 5V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 5V.PWM_Modulator_BOT_1</name>
+            <address>773</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.PWM_Modulator.BOT_1</name>
+            <address>771</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 24V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.PWM_Modulator_BOT_1</name>
+            <address>771</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.PWM_Modulator.TOP_1</name>
+            <address>770</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 24V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 24V.PWM_Modulator_TOP_1</name>
+            <address>770</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.PWM_Modulator.TOP_1</name>
+            <address>768</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 12V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.PWM_Modulator_TOP_1</name>
+            <address>768</address>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.PWM_Modulator.BOT_1</name>
+            <address>769</address>
+                <previous_names>
+                        <previous_name>Sea-surface DC-DC 12V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Sea-surface DC-DC 12V.PWM_Modulator_BOT_1</name>
+            <address>769</address>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.PWM_Modulator.TOP_1</name>
+            <address>778</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 5V.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.PWM_Modulator_TOP_1</name>
+            <address>778</address>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.PWM_Modulator.BOT_1</name>
+            <address>779</address>
+                <previous_names>
+                        <previous_name>Seafloor DC-DC 5V.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Seafloor DC-DC 5V.PWM_Modulator_BOT_1</name>
+            <address>779</address>
+            </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.PWM_Modulator.TOP_1</name>
+            <address>780</address>
+                <previous_names>
+                        <previous_name>Surface 2 Seafloor DC-DC.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.PWM_Modulator_TOP_1</name>
+            <address>780</address>
+            </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.PWM_Modulator.BOT_1</name>
+            <address>781</address>
+                <previous_names>
+                        <previous_name>Surface 2 Seafloor DC-DC.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Surface 2 Seafloor DC-DC.PWM_Modulator_BOT_1</name>
+            <address>781</address>
+            </cell>
+        <cell>
+            <name>S1.feedback</name>
+            <address>1024</address>
+                <previous_names>
+                        <previous_name>S1_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>S1_fb</name>
+            <address>1024</address>
+            </cell>
+        <cell>
+            <name>Switch Sea-surface 24V.feedback</name>
+            <address>1071</address>
+                <previous_names>
+                        <previous_name>Switch Sea-surface 24V_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Switch Sea-surface 24V_fb</name>
+            <address>1071</address>
+            </cell>
+        <cell>
+            <name>S3.feedback</name>
+            <address>1118</address>
+                <previous_names>
+                        <previous_name>S3_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>S3_fb</name>
+            <address>1118</address>
+            </cell>
+    </digital_variables>
+    <sources>
+        <cell>
+            <name>Voltage_source</name>
+            <type>1phase</type>
+            <address>[0]</address>
+            <unit>V</unit>
+            <init_settings>['Constant', 48.0]</init_settings>
+        </cell>
+    </sources>
+    <machines>
+    </machines>
+    <pv_panels>
+    </pv_panels>
+    <batteries>
+    </batteries>
+    <contactors>
+    <cell>
+        <name>S1</name>
+        <type>one_phase_breaker</type>
+        <weight>0</weight>
+        <site>0</site>
+   </cell>
+    <cell>
+        <name>Switch Sea-surface 24V</name>
+        <type>one_phase_breaker</type>
+        <weight>0</weight>
+        <site>1</site>
+   </cell>
+    <cell>
+        <name>S3</name>
+        <type>one_phase_breaker</type>
+        <weight>0</weight>
+        <site>2</site>
+   </cell>
+    </contactors>
+    <dtsms>
+        </dtsms>
+    <analog_output_settings>
+    </analog_output_settings>
+    <digital_output_settings>
+    </digital_output_settings>
+    <dtv>
+        <spc_dtv>
+            <cell>
+                <address>0</address>
+                <fqn>Surface 2 Seafloor DC-DC.IGBT Leg</fqn>
+            </cell>
+            <cell>
+                <address>3</address>
+                <fqn>Sea-surface DC-DC 12V</fqn>
+            </cell>
+            <cell>
+                <address>4</address>
+                <fqn>Sea-surface DC-DC 24V</fqn>
+            </cell>
+            <cell>
+                <address>5</address>
+                <fqn>Sea-surface DC-DC 5V</fqn>
+            </cell>
+            <cell>
+                <address>6</address>
+                <fqn>Seafloor DC-DC 12V</fqn>
+            </cell>
+            <cell>
+                <address>7</address>
+                <fqn>Seafloor DC-DC 24V</fqn>
+            </cell>
+            <cell>
+                <address>8</address>
+                <fqn>Seafloor DC-DC 5V</fqn>
+            </cell>
+        </spc_dtv>
+        <par_dtv>
+        </par_dtv>
+    </dtv>
+
+<!-- ******* SP DATA ******** -->
+
+    <model_properties>
+        <execution_rates>[[[0.0001]]]</execution_rates>
+        <sys_real_type_precision>float</sys_real_type_precision>
+        <user_real_type_precision>double</user_real_type_precision>
+        <sig_stim>off</sig_stim>
+        <update_device_time>True</update_device_time>
+    </model_properties>
+
+
+<digital_variables>
+    </digital_variables>
+
+    <tunable_params>
+        <tunable_param>
+            <name>Boost Discharge Circuit</name>
+            <addr>[1426063616]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Enable - Seafloor</name>
+            <addr>[1426063620]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Enable - Surface</name>
+            <addr>[1426063624]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Seafloor - Reference 12V</name>
+            <addr>[1426063628]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Seafloor - Reference 24V</name>
+            <addr>[1426063632]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Seafloor - Reference 5V</name>
+            <addr>[1426063636]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Surface - Reference</name>
+            <addr>[1426063640]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Surface - Reference 12V</name>
+            <addr>[1426063644]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Surface - Reference 24V</name>
+            <addr>[1426063648]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Voltage Surface - Reference 5V</name>
+            <addr>[1426063652]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+    </tunable_params>
+
+    <scada_outputs>
+        <scada_output>
+            <name>I Surface 24V</name>
+            <addr>1426063676</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I Seafloor 24V</name>
+            <addr>1426063664</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Seafloor Load 5V</name>
+            <addr>1426063712</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I Surface 12V</name>
+            <addr>1426063672</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Seafloor Load 24V</name>
+            <addr>1426063708</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Sea-surface Load 24V</name>
+            <addr>1426063696</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I Surface 5V</name>
+            <addr>1426063680</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I - Energy Storage (SCADA)</name>
+            <addr>1426063656</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Sea-surface Load 12V</name>
+            <addr>1426063692</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I Seafloor 5V</name>
+            <addr>1426063668</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Sea-surface Load 5V</name>
+            <addr>1426063700</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I Seafloor 12V</name>
+            <addr>1426063660</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>SCADA Output1</name>
+            <addr>1426063684</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Seafloor Load 12V</name>
+            <addr>1426063704</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V - Energy Storage</name>
+            <addr>1426063688</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+    </scada_outputs>
+
+    <dsp_monitors>
+        <monitor>
+            <type>user</type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rates>[0.0001]</execution_rates>
+            <execution_rate_labels>['ER0 (0.0001)']</execution_rate_labels>
+            <timer_counters>[15999]</timer_counters>
+
+            
+        </monitor>
+    </dsp_monitors>
+
+    <sp_compiler_type>gcc</sp_compiler_type>
+
+
+
+</model_description>

@@ -1,0 +1,2798 @@
+version = 4.2
+
+//
+// Saved by sw version: 2024.3
+//
+
+model "OOB_example" {
+    configuration {
+        hil_device = "HIL604"
+        hil_configuration_id = 1
+        simulation_method = exact
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = False
+        reset_analog_outputs_on_sim_stop = True
+        reset_analog_outputs_on_sim_stop_mode = Offset values
+        reset_digital_outputs_on_sim_stop = True
+        vhil_adio_loopback = False
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        export_ss_to_pickle = False
+        ground_scope_core = False
+        dss_num_tol = 1e-15
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
+        tunable_params = "component defined"
+        sp_compiler_type = "C compiler"
+        sig_stim = "off"
+        export_resource_list = ""
+        export_dependency_list = ""
+        excluded_resource_list = ""
+        export_out_file = ""
+        export_lock_top_level = True
+        export_encrypt_library = True
+        export_encrypt_resources = True
+        dae_solver = "BDF"
+        max_sim_step = 1e-4
+        simulation_time = 1.0
+        abs_tol = 1e-3
+        rel_tol = 1e-3
+        init_sim_step = 1e-6
+        r_on_sw = 1e-3
+        v_on_diode = 0.2
+        data_sampling_rate = 0
+        feedthrough_validation_error_level = error
+    }
+
+    component Subsystem Root {
+        component "core/Boost" "Surface 2 Seafloor DC-DC" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8600, 8596
+            size = 128, 256
+        ]
+
+        component "core/SCADA Input" "Enable - Seafloor" {
+            unit = ""
+        }
+        [
+            position = 8380, 8392
+        ]
+
+        component "core/Integrator" Integrator1 {
+            show_reset = "level"
+        }
+        [
+            position = 8796, 8328
+        ]
+
+        component "core/Sum" Sum2 {
+            signs = "+-"
+        }
+        [
+            position = 8540, 8244
+        ]
+
+        component "core/Gain" Gain1 {
+            gain = "P_Boost"
+        }
+        [
+            position = 8740, 8244
+        ]
+
+        component "core/Gain" Gain2 {
+            gain = "I_Boost"
+        }
+        [
+            position = 8684, 8320
+        ]
+
+        component "core/Sum" Sum3 {
+        }
+        [
+            position = 8900, 8252
+        ]
+
+        component "core/Limit" Limit1 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 9012, 8252
+        ]
+
+        component "core/Logical operator" "Logical operator1" {
+            operator = "NOT"
+        }
+        [
+            position = 8684, 8392
+        ]
+
+        component "core/Gain" Gain3 {
+            gain = "0.5"
+        }
+        [
+            position = 9108, 8252
+        ]
+
+        component "core/Sum" Sum4 {
+        }
+        [
+            position = 9220, 8260
+        ]
+
+        component "core/Constant" Constant1 {
+            value = "0.5"
+        }
+        [
+            position = 9108, 8312
+        ]
+
+        component "core/SCADA Input" "Voltage Surface - Reference" {
+            unit = ""
+        }
+        [
+            position = 7844, 8032
+        ]
+
+        component "core/Inductor" "L - Boost Converter" {
+            inductance = "L_Boost_SeaSurface[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8448, 8500
+        ]
+
+        component "core/Capacitor" "C - Boost Converter" {
+            capacitance = "C_Boost_SeaSurface[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8900, 8596
+            rotation = right
+        ]
+
+        component "core/Resistor" R1 {
+            resistance = "100"
+        }
+        [
+            position = 9500, 8636
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Boost Converter" {
+        }
+        [
+            position = 9268, 8500
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Boost Converter" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9160, 8592
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/SCADA Output" "SCADA Output1" {
+            unit = ""
+        }
+        [
+            position = 9252, 8628
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S1 {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8332, 8500
+            size = 64, 32
+        ]
+
+        component "core/Resistor" R_Transmission {
+            resistance = "RL_surf2sea_cable.R"
+        }
+        [
+            position = 9596, 8500
+        ]
+
+        component "core/Buck" "Seafloor DC-DC 12V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9964, 8596
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Seafloor Buck 12V" {
+            inductance = "L_Buck_SeaFloor[1]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10168, 8500
+        ]
+
+        component "core/Resistor" "Lumped Seafoor Load 12V" {
+            resistance = "equivalent_load_data.R_seafloor_12V"
+        }
+        [
+            position = 11140, 8592
+            rotation = right
+        ]
+
+        component "core/Capacitor" "C - Seafloor Buck 12V" {
+            capacitance = "C_Buck_SeaFloor[1]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10336, 8592
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Seafloor Load 12V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10496, 8500
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Seafloor Load 12V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10640, 8592
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S3 {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9500, 8560
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/SCADA Input" "Boost Discharge Circuit" {
+            unit = ""
+        }
+        [
+            position = 9608, 8560
+            scale = -1, 1
+        ]
+
+        component "core/Integrator" Integrator2 {
+            show_reset = "level"
+        }
+        [
+            position = 10152, 8328
+        ]
+
+        component "core/Sum" Sum5 {
+            signs = "+-"
+        }
+        [
+            position = 9896, 8248
+        ]
+
+        component "core/Gain" Gain4 {
+            gain = "P_seafloor_12V"
+        }
+        [
+            position = 10096, 8248
+        ]
+
+        component "core/Gain" Gain5 {
+            gain = "I_seafloor_12V"
+        }
+        [
+            position = 10040, 8320
+        ]
+
+        component "core/Sum" Sum6 {
+        }
+        [
+            position = 10256, 8256
+        ]
+
+        component "core/Limit" Limit2 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 10368, 8256
+        ]
+
+        component "core/Logical operator" "Logical operator2" {
+            operator = "NOT"
+        }
+        [
+            position = 10040, 8388
+        ]
+
+        component "core/Gain" Gain6 {
+            gain = "0.5"
+        }
+        [
+            position = 10464, 8256
+        ]
+
+        component "core/Sum" Sum7 {
+        }
+        [
+            position = 10576, 8264
+        ]
+
+        component "core/Constant" Constant2 {
+            value = "0.5"
+        }
+        [
+            position = 10464, 8312
+        ]
+
+        component "core/SCADA Input" "Voltage Seafloor - Reference 12V" {
+            unit = ""
+        }
+        [
+            position = 7844, 8092
+        ]
+
+        component "core/SCADA Output" "V - Seafloor Load 12V" {
+            unit = ""
+        }
+        [
+            position = 10764, 8616
+        ]
+
+        component "core/Buck" "Sea-surface DC-DC 24V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0.0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8548, 6356
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Sea-surface Buck 24V" {
+            inductance = "L_Buck_SeaSurface[2]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8740, 6260
+        ]
+
+        component "core/Capacitor" "C - Sea-surface Buck 24V" {
+            capacitance = "C_Buck_SeaSurface[2]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8868, 6356
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Sea-surface Load 24V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9344, 6260
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Sea-surface Load 24V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9156, 6356
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Current Measurement" "I - Energy Storage" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 7496, 6260
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Energy Storage" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 7416, 6356
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Resistor" "Lumped Sea-surface Load 24V" {
+            resistance = "equivalent_load_data.R_surface_24V"
+        }
+        [
+            position = 9644, 6356
+            rotation = right
+        ]
+
+        component "core/SCADA Output" "V - Sea-surface Load 24V" {
+            unit = ""
+        }
+        [
+            position = 9264, 6396
+        ]
+
+        component "core/SCADA Output" "V - Energy Storage" {
+            unit = ""
+        }
+        [
+            position = 7520, 6396
+        ]
+
+        component "core/SCADA Input" "Enable - Surface" {
+            unit = ""
+        }
+        [
+            position = 8356, 6108
+        ]
+
+        component "core/Integrator" Integrator3 {
+            show_reset = "level"
+        }
+        [
+            position = 8740, 5996
+        ]
+
+        component "core/Sum" Sum8 {
+            signs = "+-"
+        }
+        [
+            position = 8484, 5932
+        ]
+
+        component "core/Gain" P_surface_24V {
+            gain = "P_surface_24V"
+        }
+        [
+            position = 8684, 5932
+        ]
+
+        component "core/Gain" I_surface_24V {
+            gain = "I_surface_24V"
+        }
+        [
+            position = 8628, 5988
+        ]
+
+        component "core/Sum" Sum9 {
+        }
+        [
+            position = 8844, 5940
+        ]
+
+        component "core/Limit" Limit3 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 8956, 5940
+        ]
+
+        component "core/Logical operator" "Logical operator3" {
+            operator = "NOT"
+        }
+        [
+            position = 8620, 6060
+        ]
+
+        component "core/Gain" Gain9 {
+            gain = "0.5"
+        }
+        [
+            position = 9052, 5940
+        ]
+
+        component "core/Sum" Sum10 {
+        }
+        [
+            position = 9164, 5948
+        ]
+
+        component "core/Constant" Constant3 {
+            value = "0.5"
+        }
+        [
+            position = 9052, 6008
+        ]
+
+        component "core/SCADA Input" "Voltage Surface - Reference 24V" {
+            unit = ""
+        }
+        [
+            position = 7752, 5892
+        ]
+
+        component "core/SCADA Output" "I - Energy Storage (SCADA)" {
+            unit = ""
+        }
+        [
+            position = 7612, 6184
+        ]
+
+        component "core/Voltage Source" Voltage_source {
+            init_const_value = "V_source"
+        }
+        [
+            position = 7132, 6356
+            rotation = right
+        ]
+
+        component "core/Single Pole Single Throw Contactor" "Switch Sea-surface 24V" {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8144, 6260
+            size = 64, 32
+        ]
+
+        component "core/Resistor" "R shunt 24V" {
+            resistance = "0.00001"
+        }
+        [
+            position = 8416, 6260
+        ]
+
+        component "core/Single Phase Core Coupling" "Core Coupling 1" {
+        }
+        [
+            position = 8088, 8596
+            size = 12, 256
+        ]
+
+        component "core/Buck" "Sea-surface DC-DC 12V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0.0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9300, 7012
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Sea-surface Buck 12V" {
+            inductance = "L_Buck_SeaSurface[1]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9492, 6916
+        ]
+
+        component "core/Capacitor" "C - Sea-surface Buck 12V" {
+            capacitance = "C_Buck_SeaSurface[1]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9620, 7012
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Sea-surface Load 12V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10096, 6916
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Sea-surface Load 12V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9908, 7012
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Resistor" "Lumped Sea-surface Load 12V" {
+            resistance = "equivalent_load_data.R_surface_12V"
+        }
+        [
+            position = 10396, 7012
+            rotation = right
+        ]
+
+        component "core/SCADA Output" "V - Sea-surface Load 12V" {
+            unit = ""
+        }
+        [
+            position = 10016, 7052
+        ]
+
+        component "core/Resistor" "R shunt 12V" {
+            resistance = "0.00001"
+        }
+        [
+            position = 9168, 6916
+        ]
+
+        component "core/Integrator" Integrator4 {
+            show_reset = "level"
+        }
+        [
+            position = 9484, 6712
+        ]
+
+        component "core/Sum" Sum11 {
+            signs = "+-"
+        }
+        [
+            position = 9228, 6648
+        ]
+
+        component "core/Gain" Gain10 {
+            gain = "P_surface_12V"
+        }
+        [
+            position = 9428, 6648
+        ]
+
+        component "core/Gain" Gain11 {
+            gain = "I_surface_12V"
+        }
+        [
+            position = 9372, 6704
+        ]
+
+        component "core/Sum" Sum12 {
+        }
+        [
+            position = 9588, 6656
+        ]
+
+        component "core/Limit" Limit4 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 9700, 6656
+        ]
+
+        component "core/Logical operator" "Logical operator4" {
+            operator = "NOT"
+        }
+        [
+            position = 9364, 6776
+        ]
+
+        component "core/Gain" Gain12 {
+            gain = "0.5"
+        }
+        [
+            position = 9796, 6656
+        ]
+
+        component "core/Sum" Sum13 {
+        }
+        [
+            position = 9908, 6664
+        ]
+
+        component "core/Constant" Constant4 {
+            value = "0.5"
+        }
+        [
+            position = 9796, 6724
+        ]
+
+        component "core/SCADA Input" "Voltage Surface - Reference 12V" {
+            unit = ""
+        }
+        [
+            position = 7752, 5952
+        ]
+
+        component "core/Buck" "Sea-surface DC-DC 5V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0.0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9304, 7624
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Sea-surface Buck 5V" {
+            inductance = "L_Buck_SeaSurface[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9496, 7528
+        ]
+
+        component "core/Capacitor" "C - Sea-surface Buck 5V" {
+            capacitance = "C_Buck_SeaSurface[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9624, 7624
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Sea-surface Load 5V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10100, 7528
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Sea-surface Load 5V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9912, 7624
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Resistor" "Lumped Sea-surface Load 5V" {
+            resistance = "equivalent_load_data.R_surface_5V"
+        }
+        [
+            position = 10400, 7624
+            rotation = right
+        ]
+
+        component "core/SCADA Output" "V - Sea-surface Load 5V" {
+            unit = ""
+        }
+        [
+            position = 10020, 7664
+        ]
+
+        component "core/Resistor" "R shunt 5V" {
+            resistance = "0.00001"
+        }
+        [
+            position = 9172, 7528
+        ]
+
+        component "core/Integrator" Integrator5 {
+            show_reset = "level"
+        }
+        [
+            position = 9488, 7324
+        ]
+
+        component "core/Sum" Sum14 {
+            signs = "+-"
+        }
+        [
+            position = 9232, 7260
+        ]
+
+        component "core/Gain" Gain13 {
+            gain = "P_surface_5V"
+        }
+        [
+            position = 9432, 7260
+        ]
+
+        component "core/Gain" Gain14 {
+            gain = "I_surface_5V"
+        }
+        [
+            position = 9376, 7316
+        ]
+
+        component "core/Sum" Sum15 {
+        }
+        [
+            position = 9592, 7268
+        ]
+
+        component "core/Limit" Limit5 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 9704, 7268
+        ]
+
+        component "core/Logical operator" "Logical operator5" {
+            operator = "NOT"
+        }
+        [
+            position = 9368, 7388
+        ]
+
+        component "core/Gain" Gain15 {
+            gain = "0.5"
+        }
+        [
+            position = 9800, 7268
+        ]
+
+        component "core/Sum" Sum16 {
+        }
+        [
+            position = 9912, 7276
+        ]
+
+        component "core/Constant" Constant5 {
+            value = "0.5"
+        }
+        [
+            position = 9800, 7336
+        ]
+
+        component "core/SCADA Input" "Voltage Surface - Reference 5V" {
+            unit = ""
+        }
+        [
+            position = 7752, 6016
+        ]
+
+        component "core/Single Phase Core Coupling" "Core Coupling 2" {
+        }
+        [
+            position = 9416, 8596
+            size = 12, 256
+        ]
+
+        component "core/Buck" "Seafloor DC-DC 24V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10360, 9236
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Seafloor Buck 24V" {
+            inductance = "L_Buck_SeaFloor[2]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10600, 9140
+        ]
+
+        component "core/Resistor" "Lumped Seafoor Load 24V" {
+            resistance = "equivalent_load_data.R_seafloor_24V"
+        }
+        [
+            position = 11572, 9232
+            rotation = right
+        ]
+
+        component "core/Capacitor" "C - Seafloor Buck 24V" {
+            capacitance = "C_Buck_SeaFloor[2]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10768, 9232
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Seafloor Load 24V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10928, 9140
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Seafloor Load 24V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 11072, 9232
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/SCADA Output" "V - Seafloor Load 24V" {
+            unit = ""
+        }
+        [
+            position = 11196, 9256
+        ]
+
+        component "core/Integrator" Integrator6 {
+            show_reset = "level"
+        }
+        [
+            position = 10544, 8972
+        ]
+
+        component "core/Sum" Sum17 {
+            signs = "+-"
+        }
+        [
+            position = 10288, 8892
+        ]
+
+        component "core/Gain" Gain16 {
+            gain = "P_seafloor_24V"
+        }
+        [
+            position = 10488, 8892
+        ]
+
+        component "core/Gain" Gain17 {
+            gain = "I_seafloor_24V"
+        }
+        [
+            position = 10432, 8964
+        ]
+
+        component "core/Sum" Sum18 {
+        }
+        [
+            position = 10648, 8900
+        ]
+
+        component "core/Limit" Limit6 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 10760, 8900
+        ]
+
+        component "core/Logical operator" "Logical operator6" {
+            operator = "NOT"
+        }
+        [
+            position = 10432, 9032
+        ]
+
+        component "core/Gain" Gain18 {
+            gain = "0.5"
+        }
+        [
+            position = 10856, 8900
+        ]
+
+        component "core/Sum" Sum19 {
+        }
+        [
+            position = 10968, 8908
+        ]
+
+        component "core/Constant" Constant6 {
+            value = "0.5"
+        }
+        [
+            position = 10856, 8956
+        ]
+
+        component "core/SCADA Input" "Voltage Seafloor - Reference 24V" {
+            unit = ""
+        }
+        [
+            position = 7844, 8152
+        ]
+
+        component "core/Buck" "Seafloor DC-DC 5V" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            fvd_def_method = "LUT"
+            ref_sig_min_max = "[0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10360, 9844
+            size = 127, 256
+        ]
+
+        component "core/Inductor" "L - Seafloor Buck 5V" {
+            inductance = "L_Buck_SeaFloor[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10600, 9748
+        ]
+
+        component "core/Resistor" "Lumped Seafoor Load 5V" {
+            resistance = "equivalent_load_data.R_seafloor_5V"
+        }
+        [
+            position = 11572, 9840
+            rotation = right
+        ]
+
+        component "core/Capacitor" "C - Seafloor Buck 5V" {
+            capacitance = "C_Buck_SeaFloor[0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10768, 9840
+            rotation = right
+        ]
+
+        component "core/Current Measurement" "I - Seafloor Load 5V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 10928, 9748
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" "Voltage - Seafloor Load 5V" {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 11072, 9840
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/SCADA Output" "V - Seafloor Load 5V" {
+            unit = ""
+        }
+        [
+            position = 11196, 9864
+        ]
+
+        component "core/Integrator" Integrator7 {
+            show_reset = "level"
+        }
+        [
+            position = 10544, 9580
+        ]
+
+        component "core/Sum" Sum20 {
+            signs = "+-"
+        }
+        [
+            position = 10288, 9500
+        ]
+
+        component "core/Gain" P_Floor_5V {
+            gain = "P_seafloor_5V"
+        }
+        [
+            position = 10488, 9500
+        ]
+
+        component "core/Gain" I_Floor_5V {
+            gain = "I_seafloor_5V"
+        }
+        [
+            position = 10432, 9572
+        ]
+
+        component "core/Sum" Sum21 {
+        }
+        [
+            position = 10648, 9508
+        ]
+
+        component "core/Limit" Limit7 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 10760, 9508
+        ]
+
+        component "core/Logical operator" "Logical operator7" {
+            operator = "NOT"
+        }
+        [
+            position = 10432, 9640
+        ]
+
+        component "core/Gain" Gain21 {
+            gain = "0.5"
+        }
+        [
+            position = 10856, 9508
+        ]
+
+        component "core/Sum" Sum22 {
+        }
+        [
+            position = 10968, 9516
+        ]
+
+        component "core/Constant" Constant7 {
+            value = "0.5"
+        }
+        [
+            position = 10856, 9564
+        ]
+
+        component "core/SCADA Input" "Voltage Seafloor - Reference 5V" {
+            unit = ""
+        }
+        [
+            position = 7844, 8208
+        ]
+
+        component "core/SCADA Output" "I Surface 24V" {
+            unit = ""
+        }
+        [
+            position = 9452, 6184
+        ]
+
+        component "core/SCADA Output" "I Surface 12V" {
+            unit = ""
+        }
+        [
+            position = 10224, 6820
+        ]
+
+        component "core/SCADA Output" "I Surface 5V" {
+            unit = ""
+        }
+        [
+            position = 10212, 7456
+        ]
+
+        component "core/SCADA Output" "I Seafloor 12V" {
+            unit = ""
+        }
+        [
+            position = 10664, 8460
+        ]
+
+        component "core/SCADA Output" "I Seafloor 24V" {
+            unit = ""
+        }
+        [
+            position = 11076, 9100
+        ]
+
+        component "core/SCADA Output" "I Seafloor 5V" {
+            unit = ""
+        }
+        [
+            position = 11076, 9708
+        ]
+
+        tag From3 {
+            value = "Voltage Measured - Boost"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8368, 8284
+            size = 180, 20
+        ]
+
+        tag From4 {
+            value = "Voltage Boost - Reference"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8368, 8204
+            size = 180, 20
+        ]
+
+        tag Goto3 {
+            value = "Voltage Boost - Reference"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8064, 8032
+            size = 164, 20
+        ]
+
+        tag Goto4 {
+            value = "Voltage Measured - Boost"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 9308, 8568
+            size = 156, 20
+        ]
+
+        tag From5 {
+            value = "Voltage Measured - Seafloor 12V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9704, 8288
+            size = 228, 20
+        ]
+
+        tag From6 {
+            value = "Voltage Seafloor - Reference 12V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9704, 8208
+            size = 228, 20
+        ]
+
+        tag Goto5 {
+            value = "Voltage Measured - Seafloor 12V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 10836, 8556
+            size = 220, 20
+        ]
+
+        tag Goto6 {
+            value = "Voltage Seafloor - Reference 12V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8088, 8092
+            size = 212, 20
+        ]
+
+        tag Goto1 {
+            value = "V_bat"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7520, 6320
+            size = 60, 20
+        ]
+
+        tag Goto2 {
+            value = "Voltage Measured - Surface 24V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 9304, 6320
+            size = 164, 20
+        ]
+
+        tag From7 {
+            value = "Voltage Measured - Surface 24V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8312, 5972
+            size = 164, 20
+        ]
+
+        tag From8 {
+            value = "Voltage Surface - Reference 24V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8312, 5892
+            size = 164, 20
+        ]
+
+        tag Goto7 {
+            value = "Voltage Surface - Reference 24V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8004, 5892
+            size = 228, 20
+        ]
+
+        tag Goto10 {
+            value = "Enable - Surface"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8232, 6108
+            size = 84, 20
+        ]
+
+        tag Goto8 {
+            value = "Voltage Measured - Surface 12V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 10056, 6976
+            size = 164, 20
+        ]
+
+        tag From9 {
+            value = "Voltage Measured - Surface 12V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9056, 6688
+            size = 164, 20
+        ]
+
+        tag From10 {
+            value = "Voltage Surface - Reference 12V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9056, 6608
+            size = 164, 20
+        ]
+
+        tag From11 {
+            value = "Enable - Surface"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9120, 6808
+            size = 100, 20
+        ]
+
+        tag Goto9 {
+            value = "Voltage Surface - Reference 12V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8004, 5952
+            size = 228, 20
+        ]
+
+        tag Goto11 {
+            value = "Voltage Measured - Surface 5V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 10060, 7588
+            size = 164, 20
+        ]
+
+        tag From12 {
+            value = "Voltage Measured - Surface 5V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9060, 7300
+            size = 164, 20
+        ]
+
+        tag From13 {
+            value = "Voltage Surface - Reference 5V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9060, 7220
+            size = 164, 20
+        ]
+
+        tag From14 {
+            value = "Enable - Surface"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9136, 7444
+            size = 100, 20
+        ]
+
+        tag Goto12 {
+            value = "Voltage Surface - Reference 5V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8004, 6016
+            size = 228, 20
+        ]
+
+        tag Goto13 {
+            value = "Enable - Seafloor"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8324, 8344
+            scale = -1, 1
+            size = 132, 20
+        ]
+
+        tag From15 {
+            value = "Enable - Seafloor"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 9820, 8388
+            size = 124, 20
+        ]
+
+        tag Goto14 {
+            value = "Voltage Measured - Seafloor 24V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 11268, 9196
+            size = 220, 20
+        ]
+
+        tag From16 {
+            value = "Voltage Measured - Seafloor 24V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10096, 8932
+            size = 228, 20
+        ]
+
+        tag From17 {
+            value = "Voltage Seafloor - Reference 24V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10096, 8852
+            size = 228, 20
+        ]
+
+        tag From18 {
+            value = "Enable - Seafloor"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10212, 9032
+            size = 124, 20
+        ]
+
+        tag Goto15 {
+            value = "Voltage Seafloor - Reference 24V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8088, 8152
+            size = 212, 20
+        ]
+
+        tag Goto16 {
+            value = "Voltage Measured - Seafloor 5V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 11268, 9804
+            size = 220, 20
+        ]
+
+        tag From19 {
+            value = "Voltage Measured - Seafloor 5V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10096, 9540
+            size = 228, 20
+        ]
+
+        tag From20 {
+            value = "Voltage Seafloor - Reference 5V"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10096, 9460
+            size = 228, 20
+        ]
+
+        tag From21 {
+            value = "Enable - Seafloor"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 10212, 9640
+            size = 124, 20
+        ]
+
+        tag Goto17 {
+            value = "Voltage Seafloor - Reference 5V"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8088, 8208
+            size = 212, 20
+        ]
+
+        junction Junction45 sp
+        [
+            position = 8604, 8244
+        ]
+
+        junction Junction12 pe
+        [
+            position = 8900, 8692
+        ]
+
+        junction Junction58 pe
+        [
+            position = 9160, 8500
+        ]
+
+        junction Junction62 sp
+        [
+            position = 9192, 8592
+        ]
+
+        junction Junction63 pe
+        [
+            position = 8900, 8500
+        ]
+
+        junction Junction66 sp
+        [
+            position = 8492, 8392
+        ]
+
+        junction Junction69 pe
+        [
+            position = 10336, 8500
+        ]
+
+        junction Junction71 pe
+        [
+            position = 10336, 8692
+        ]
+
+        junction Junction73 sp
+        [
+            position = 9960, 8248
+        ]
+
+        junction Junction75 sp
+        [
+            position = 10676, 8592
+        ]
+
+        junction Junction17 pe
+        [
+            position = 8868, 6260
+        ]
+
+        junction Junction18 pe
+        [
+            position = 8868, 6452
+        ]
+
+        junction Junction19 pe
+        [
+            position = 9156, 6260
+        ]
+
+        junction Junction52 pe
+        [
+            position = 9156, 6452
+        ]
+
+        junction Junction53 sp
+        [
+            position = 9188, 6356
+        ]
+
+        junction Junction55 sp
+        [
+            position = 7448, 6356
+        ]
+
+        junction Junction79 sp
+        [
+            position = 8548, 5932
+        ]
+
+        junction Junction80 sp
+        [
+            position = 8540, 6108
+        ]
+
+        junction Junction57 pe
+        [
+            position = 7416, 6260
+        ]
+
+        junction Junction81 pe
+        [
+            position = 7416, 6452
+        ]
+
+        junction Junction84 sp
+        [
+            position = 8472, 6108
+        ]
+
+        junction Junction86 pe
+        [
+            position = 7492, 6452
+        ]
+
+        junction Junction97 sp
+        [
+            position = 8144, 6184
+        ]
+
+        junction Junction87 pe
+        [
+            position = 9620, 6916
+        ]
+
+        junction Junction88 pe
+        [
+            position = 9620, 7108
+        ]
+
+        junction Junction89 pe
+        [
+            position = 9908, 6916
+        ]
+
+        junction Junction90 pe
+        [
+            position = 9908, 7108
+        ]
+
+        junction Junction91 sp
+        [
+            position = 9940, 7012
+        ]
+
+        junction Junction94 sp
+        [
+            position = 9292, 6648
+        ]
+
+        junction Junction108 sp
+        [
+            position = 9292, 6808
+        ]
+
+        junction Junction109 pe
+        [
+            position = 8308, 6260
+        ]
+
+        junction Junction110 pe
+        [
+            position = 8192, 6452
+        ]
+
+        junction Junction99 pe
+        [
+            position = 9624, 7528
+        ]
+
+        junction Junction100 pe
+        [
+            position = 9624, 7720
+        ]
+
+        junction Junction101 pe
+        [
+            position = 9912, 7528
+        ]
+
+        junction Junction102 pe
+        [
+            position = 9912, 7720
+        ]
+
+        junction Junction103 sp
+        [
+            position = 9944, 7624
+        ]
+
+        junction Junction104 sp
+        [
+            position = 9296, 7260
+        ]
+
+        junction Junction105 sp
+        [
+            position = 9296, 7444
+        ]
+
+        junction Junction111 pe
+        [
+            position = 8308, 6916
+        ]
+
+        junction Junction112 pe
+        [
+            position = 8192, 7108
+        ]
+
+        junction Junction113 pe
+        [
+            position = 7636, 6260
+        ]
+
+        junction Junction114 pe
+        [
+            position = 10640, 8500
+        ]
+
+        junction Junction115 pe
+        [
+            position = 10640, 8692
+        ]
+
+        junction Junction116 sp
+        [
+            position = 8592, 8392
+        ]
+
+        junction Junction117 sp
+        [
+            position = 8492, 8392
+        ]
+
+        junction Junction118 sp
+        [
+            position = 9956, 8388
+        ]
+
+        junction Junction119 pe
+        [
+            position = 9500, 8500
+        ]
+
+        junction Junction120 pe
+        [
+            position = 9160, 8692
+        ]
+
+        junction Junction121 pe
+        [
+            position = 9500, 8692
+        ]
+
+        junction Junction122 pe
+        [
+            position = 10768, 9140
+        ]
+
+        junction Junction123 pe
+        [
+            position = 10768, 9332
+        ]
+
+        junction Junction124 sp
+        [
+            position = 11108, 9232
+        ]
+
+        junction Junction125 pe
+        [
+            position = 11072, 9140
+        ]
+
+        junction Junction126 pe
+        [
+            position = 11072, 9332
+        ]
+
+        junction Junction129 sp
+        [
+            position = 10352, 8892
+        ]
+
+        junction Junction130 sp
+        [
+            position = 10352, 9032
+        ]
+
+        junction Junction132 pe
+        [
+            position = 10768, 9748
+        ]
+
+        junction Junction133 pe
+        [
+            position = 10768, 9940
+        ]
+
+        junction Junction134 sp
+        [
+            position = 11108, 9840
+        ]
+
+        junction Junction135 pe
+        [
+            position = 11072, 9748
+        ]
+
+        junction Junction136 pe
+        [
+            position = 11072, 9940
+        ]
+
+        junction Junction137 sp
+        [
+            position = 10352, 9500
+        ]
+
+        junction Junction138 sp
+        [
+            position = 10352, 9640
+        ]
+
+        junction Junction139 pe
+        [
+            position = 9816, 8500
+        ]
+
+        junction Junction140 pe
+        [
+            position = 9732, 8688
+        ]
+
+        junction Junction141 pe
+        [
+            position = 9816, 9140
+        ]
+
+        junction Junction142 pe
+        [
+            position = 9732, 9332
+        ]
+
+        connect Gain2.out Integrator1.in as Connection295
+        connect Gain1.out Sum3.in as Connection301
+        connect Integrator1.out Sum3.in1 as Connection302
+        connect Junction45 Gain1.in as Connection305
+        connect Gain2.in Junction45 as Connection306
+        connect From3 Sum2.in1 as Connection311
+        [
+            breakpoints = 8484, 8284; 8484, 8252
+        ]
+        connect From4 Sum2.in as Connection314
+        [
+            breakpoints = 8484, 8204; 8484, 8236
+        ]
+        connect Limit1.out Gain3.in as Connection319
+        connect Gain3.out Sum4.in as Connection320
+        connect Constant1.out Sum4.in1 as Connection322
+        connect Junction45 Sum2.out as Connection338
+        connect Limit1.in Sum3.out as Connection339
+        connect "Voltage Surface - Reference.out" Goto3 as Connection312
+        connect "C - Boost Converter.n_node" Junction12 as Connection99
+        connect "Surface 2 Seafloor DC-DC.b_out" Junction12 as Connection378
+        connect "I - Boost Converter.p_node" Junction58 as Connection382
+        connect "Voltage - Boost Converter.p_node" Junction58 as Connection384
+        connect Goto4 Junction62 as Connection402
+        connect Junction62 "Voltage - Boost Converter.out" as Connection403
+        connect "SCADA Output1.in" Junction62 as Connection404
+        connect "C - Boost Converter.p_node" Junction63 as Connection409
+        connect Junction63 Junction58 as Connection410
+        connect "Surface 2 Seafloor DC-DC.a_out" Junction63 as Connection411
+        connect "L - Boost Converter.n_node" "Surface 2 Seafloor DC-DC.a_in" as Connection415
+        connect "L - Boost Converter.p_node" S1.a_out as Connection419
+        connect "Enable - Seafloor.out" Junction66 as Connection421
+        connect S1.ctrl_in Junction66 as Connection423
+        [
+            breakpoints = 8372, 8464; 8492, 8464
+        ]
+        connect "L - Seafloor Buck 12V.p_node" "Seafloor DC-DC 12V.a_out" as Connection433
+        connect "C - Seafloor Buck 12V.p_node" Junction69 as Connection434
+        connect Junction69 "L - Seafloor Buck 12V.n_node" as Connection435
+        connect "I - Seafloor Load 12V.p_node" Junction69 as Connection437
+        connect "C - Seafloor Buck 12V.n_node" Junction71 as Connection442
+        connect Junction71 "Seafloor DC-DC 12V.b_out" as Connection443
+        connect R1.p_node S3.a_out as Connection451
+        connect "Boost Discharge Circuit.out" S3.ctrl_in as Connection453
+        connect Gain5.out Integrator2.in as Connection454
+        connect Gain4.out Sum6.in as Connection456
+        connect Integrator2.out Sum6.in1 as Connection457
+        connect Junction73 Gain4.in as Connection458
+        connect Gain5.in Junction73 as Connection459
+        connect From5 Sum5.in1 as Connection460
+        [
+            breakpoints = 9840, 8288; 9840, 8256
+        ]
+        connect From6 Sum5.in as Connection461
+        [
+            breakpoints = 9840, 8208; 9840, 8240
+        ]
+        connect Limit2.out Gain6.in as Connection462
+        connect Gain6.out Sum7.in as Connection463
+        connect Constant2.out Sum7.in1 as Connection464
+        connect Junction73 Sum5.out as Connection465
+        connect Limit2.in Sum6.out as Connection466
+        connect "Voltage Seafloor - Reference 12V.out" Goto6 as Connection475
+        connect Goto5 Junction75 as Connection476
+        connect Junction75 "Voltage - Seafloor Load 12V.out" as Connection477
+        connect "V - Seafloor Load 12V.in" Junction75 as Connection478
+        connect "Sea-surface DC-DC 24V.a_out" "L - Sea-surface Buck 24V.p_node" as Connection78
+        connect "C - Sea-surface Buck 24V.p_node" Junction17 as Connection121
+        connect Junction17 "L - Sea-surface Buck 24V.n_node" as Connection122
+        [
+            breakpoints = 8836, 6260
+        ]
+        connect "C - Sea-surface Buck 24V.n_node" Junction18 as Connection125
+        connect Junction18 "Sea-surface DC-DC 24V.b_out" as Connection126
+        [
+            breakpoints = 8796, 6452
+        ]
+        connect "I - Sea-surface Load 24V.p_node" Junction19 as Connection128
+        connect Junction19 Junction17 as Connection129
+        connect "Voltage - Sea-surface Load 24V.p_node" Junction19 as Connection130
+        connect "I - Sea-surface Load 24V.n_node" "Lumped Sea-surface Load 24V.p_node" as Connection341
+        connect Junction18 Junction52 as Connection342
+        connect Junction52 "Voltage - Sea-surface Load 24V.n_node" as Connection343
+        connect "Lumped Sea-surface Load 24V.n_node" Junction52 as Connection344
+        connect Goto2 Junction53 as Connection346
+        connect Junction53 "Voltage - Sea-surface Load 24V.out" as Connection347
+        connect "V - Sea-surface Load 24V.in" Junction53 as Connection348
+        connect Goto1 Junction55 as Connection365
+        connect Junction55 "Voltage - Energy Storage.out" as Connection366
+        connect "V - Energy Storage.in" Junction55 as Connection367
+        connect I_surface_24V.out Integrator3.in as Connection489
+        connect P_surface_24V.out Sum9.in as Connection491
+        connect Integrator3.out Sum9.in1 as Connection492
+        connect Junction79 P_surface_24V.in as Connection493
+        connect I_surface_24V.in Junction79 as Connection494
+        connect From7 Sum8.in1 as Connection495
+        [
+            breakpoints = 8428, 5972; 8428, 5940
+        ]
+        connect From8 Sum8.in as Connection496
+        [
+            breakpoints = 8428, 5892; 8428, 5924
+        ]
+        connect Limit3.out Gain9.in as Connection497
+        connect Gain9.out Sum10.in as Connection498
+        connect Constant3.out Sum10.in1 as Connection499
+        connect Junction79 Sum8.out as Connection500
+        connect Limit3.in Sum9.out as Connection501
+        connect "Voltage Surface - Reference 24V.out" Goto7 as Connection502
+        connect Junction80 "Logical operator3.in" as Connection503
+        [
+            breakpoints = 8540, 6108; 8540, 6060; 8580, 6060
+        ]
+        connect "Sea-surface DC-DC 24V.En" Junction80 as Connection372
+        connect "I - Energy Storage (SCADA).in" "I - Energy Storage.out" as Connection375
+        connect "Sea-surface DC-DC 24V.In" Sum10.out as Connection504
+        [
+            breakpoints = 8556, 6108; 9204, 6108
+        ]
+        connect "Voltage - Energy Storage.p_node" Junction57 as Connection389
+        connect Junction57 "I - Energy Storage.p_node" as Connection505
+        connect Voltage_source.p_node Junction57 as Connection506
+        connect Junction81 "Voltage - Energy Storage.n_node" as Connection393
+        connect Voltage_source.n_node Junction81 as Connection394
+        connect Junction84 Junction80 as Connection511
+        connect "R shunt 24V.n_node" "Sea-surface DC-DC 24V.a_in" as Connection513
+        connect Junction86 Junction81 as Connection522
+        connect S1.a_in "Core Coupling 1.a_out" as Connection525
+        connect "Surface 2 Seafloor DC-DC.b_in" "Core Coupling 1.b_out" as Connection527
+        connect "Core Coupling 1.b_in" Junction86 as Connection528
+        connect "Logical operator3.out" Integrator3.reset as Connection529
+        [
+            breakpoints = 8684, 6060; 8684, 6004
+        ]
+        connect "Switch Sea-surface 24V.ctrl_in" Junction97 as Connection579
+        connect Junction97 Junction84 as Connection580
+        [
+            breakpoints = 8392, 6188; 8472, 6188; 8472, 6108
+        ]
+        connect Goto10 Junction97 as Connection581
+        connect "Enable - Surface.out" Junction84 as Connection632
+        connect "Sea-surface DC-DC 12V.a_out" "L - Sea-surface Buck 12V.p_node" as Connection530
+        connect "C - Sea-surface Buck 12V.p_node" Junction87 as Connection531
+        connect Junction87 "L - Sea-surface Buck 12V.n_node" as Connection532
+        [
+            breakpoints = 9588, 6916
+        ]
+        connect "C - Sea-surface Buck 12V.n_node" Junction88 as Connection533
+        connect Junction88 "Sea-surface DC-DC 12V.b_out" as Connection534
+        [
+            breakpoints = 9548, 7108
+        ]
+        connect "I - Sea-surface Load 12V.p_node" Junction89 as Connection535
+        connect Junction89 Junction87 as Connection536
+        connect "Voltage - Sea-surface Load 12V.p_node" Junction89 as Connection537
+        connect "I - Sea-surface Load 12V.n_node" "Lumped Sea-surface Load 12V.p_node" as Connection538
+        connect Junction88 Junction90 as Connection539
+        connect Junction90 "Voltage - Sea-surface Load 12V.n_node" as Connection540
+        connect "Lumped Sea-surface Load 12V.n_node" Junction90 as Connection541
+        connect Goto8 Junction91 as Connection542
+        connect Junction91 "Voltage - Sea-surface Load 12V.out" as Connection543
+        connect "V - Sea-surface Load 12V.in" Junction91 as Connection544
+        connect "R shunt 12V.n_node" "Sea-surface DC-DC 12V.a_in" as Connection545
+        connect Gain11.out Integrator4.in as Connection554
+        connect Gain10.out Sum12.in as Connection555
+        connect Integrator4.out Sum12.in1 as Connection556
+        connect Junction94 Gain10.in as Connection557
+        connect Gain11.in Junction94 as Connection558
+        connect From9 Sum11.in1 as Connection559
+        [
+            breakpoints = 9172, 6688; 9172, 6656
+        ]
+        connect From10 Sum11.in as Connection560
+        [
+            breakpoints = 9172, 6608; 9172, 6640
+        ]
+        connect Limit4.out Gain12.in as Connection561
+        connect Gain12.out Sum13.in as Connection562
+        connect Constant4.out Sum13.in1 as Connection563
+        connect Junction94 Sum11.out as Connection564
+        connect Limit4.in Sum12.out as Connection565
+        connect "Logical operator4.out" Integrator4.reset as Connection569
+        [
+            breakpoints = 9428, 6776; 9428, 6720
+        ]
+        connect Sum13.out "Sea-surface DC-DC 12V.In" as Connection573
+        [
+            breakpoints = 9948, 6832; 9308, 6832
+        ]
+        connect "Logical operator4.in" Junction108 as Connection634
+        [
+            breakpoints = 9324, 6776; 9292, 6776
+        ]
+        connect Junction108 "Sea-surface DC-DC 12V.En" as Connection635
+        connect From11 Junction108 as Connection636
+        connect "Voltage Surface - Reference 12V.out" Goto9 as Connection572
+        connect "Switch Sea-surface 24V.a_out" Junction109 as Connection639
+        connect Junction109 "R shunt 24V.p_node" as Connection640
+        connect "Sea-surface DC-DC 24V.b_in" Junction110 as Connection642
+        connect Junction110 Junction86 as Connection643
+        connect "Sea-surface DC-DC 5V.a_out" "L - Sea-surface Buck 5V.p_node" as Connection586
+        connect "C - Sea-surface Buck 5V.p_node" Junction99 as Connection587
+        connect Junction99 "L - Sea-surface Buck 5V.n_node" as Connection588
+        [
+            breakpoints = 9592, 7528
+        ]
+        connect "C - Sea-surface Buck 5V.n_node" Junction100 as Connection589
+        connect Junction100 "Sea-surface DC-DC 5V.b_out" as Connection590
+        [
+            breakpoints = 9552, 7720
+        ]
+        connect "I - Sea-surface Load 5V.p_node" Junction101 as Connection591
+        connect Junction101 Junction99 as Connection592
+        connect "Voltage - Sea-surface Load 5V.p_node" Junction101 as Connection593
+        connect "I - Sea-surface Load 5V.n_node" "Lumped Sea-surface Load 5V.p_node" as Connection594
+        connect Junction100 Junction102 as Connection595
+        connect Junction102 "Voltage - Sea-surface Load 5V.n_node" as Connection596
+        connect "Lumped Sea-surface Load 5V.n_node" Junction102 as Connection597
+        connect Goto11 Junction103 as Connection598
+        connect Junction103 "Voltage - Sea-surface Load 5V.out" as Connection599
+        connect "V - Sea-surface Load 5V.in" Junction103 as Connection600
+        connect "R shunt 5V.n_node" "Sea-surface DC-DC 5V.a_in" as Connection601
+        connect Gain14.out Integrator5.in as Connection602
+        connect Gain13.out Sum15.in as Connection603
+        connect Integrator5.out Sum15.in1 as Connection604
+        connect Junction104 Gain13.in as Connection605
+        connect Gain14.in Junction104 as Connection606
+        connect From12 Sum14.in1 as Connection607
+        [
+            breakpoints = 9176, 7300; 9176, 7268
+        ]
+        connect From13 Sum14.in as Connection608
+        [
+            breakpoints = 9176, 7220; 9176, 7252
+        ]
+        connect Limit5.out Gain15.in as Connection609
+        connect Gain15.out Sum16.in as Connection610
+        connect Constant5.out Sum16.in1 as Connection611
+        connect Junction104 Sum14.out as Connection612
+        connect Limit5.in Sum15.out as Connection613
+        connect "Logical operator5.out" Integrator5.reset as Connection614
+        [
+            breakpoints = 9432, 7388; 9432, 7332
+        ]
+        connect Sum16.out "Sea-surface DC-DC 5V.In" as Connection615
+        [
+            breakpoints = 9952, 7444; 9312, 7444
+        ]
+        connect "Logical operator5.in" Junction105 as Connection616
+        [
+            breakpoints = 9328, 7388; 9296, 7388
+        ]
+        connect Junction105 "Sea-surface DC-DC 5V.En" as Connection617
+        connect From14 Junction105 as Connection618
+        [
+            breakpoints = 9204, 7444; 9296, 7444
+        ]
+        connect "R shunt 12V.p_node" Junction111 as Connection645
+        connect Junction111 Junction109 as Connection646
+        connect "R shunt 5V.p_node" Junction111 as Connection647
+        connect "Sea-surface DC-DC 12V.b_in" Junction112 as Connection648
+        connect Junction112 Junction110 as Connection649
+        [
+            breakpoints = 8192, 7108; 8192, 6492
+        ]
+        connect "Sea-surface DC-DC 5V.b_in" Junction112 as Connection650
+        [
+            breakpoints = 8192, 7720; 8192, 7108
+        ]
+        connect "Voltage Surface - Reference 5V.out" Goto12 as Connection651
+        connect "I - Energy Storage.n_node" Junction113 as Connection655
+        connect Junction113 "Switch Sea-surface 24V.a_in" as Connection656
+        connect "Core Coupling 1.a_in" Junction113 as Connection657
+        connect "I - Seafloor Load 12V.n_node" Junction114 as Connection662
+        connect Junction114 "Voltage - Seafloor Load 12V.p_node" as Connection663
+        connect Junction71 Junction115 as Connection665
+        connect Junction115 "Voltage - Seafloor Load 12V.n_node" as Connection666
+        connect "Surface 2 Seafloor DC-DC.En" Junction116 as Connection671
+        connect "Logical operator1.in" Junction116 as Connection673
+        connect Integrator1.reset "Logical operator1.out" as Connection674
+        [
+            breakpoints = 8740, 8336; 8740, 8392
+        ]
+        connect Sum4.out "Surface 2 Seafloor DC-DC.In" as Connection675
+        [
+            breakpoints = 9260, 8444; 8608, 8444
+        ]
+        connect Sum7.out "Seafloor DC-DC 12V.In" as Connection677
+        [
+            breakpoints = 10624, 8444; 9972, 8444
+        ]
+        connect "Logical operator2.out" Integrator2.reset as Connection678
+        [
+            breakpoints = 10092, 8388; 10092, 8336
+        ]
+        connect Junction116 Junction117 as Connection679
+        [
+            breakpoints = 8592, 8392
+        ]
+        connect Junction117 Junction66 as Connection680
+        [
+            breakpoints = 8492, 8392
+        ]
+        connect Goto13 Junction117 as Connection681
+        connect "Seafloor DC-DC 12V.En" Junction118 as Connection682
+        connect Junction118 "Logical operator2.in" as Connection683
+        connect From15 Junction118 as Connection684
+        connect R_Transmission.p_node Junction119 as Connection692
+        connect Junction119 S3.a_in as Connection693
+        connect Junction12 Junction120 as Connection695
+        connect Junction120 "Voltage - Boost Converter.n_node" as Connection696
+        connect R1.n_node Junction121 as Connection697
+        connect "I - Boost Converter.n_node" "Core Coupling 2.a_in" as Connection699
+        connect "Core Coupling 2.a_out" Junction119 as Connection700
+        connect Junction120 "Core Coupling 2.b_in" as Connection701
+        connect "Core Coupling 2.b_out" Junction121 as Connection702
+        connect "C - Seafloor Buck 24V.p_node" Junction122 as Connection703
+        connect Junction122 "L - Seafloor Buck 24V.n_node" as Connection704
+        connect "I - Seafloor Load 24V.p_node" Junction122 as Connection705
+        connect "C - Seafloor Buck 24V.n_node" Junction123 as Connection706
+        connect Goto14 Junction124 as Connection707
+        connect Junction124 "Voltage - Seafloor Load 24V.out" as Connection708
+        connect "V - Seafloor Load 24V.in" Junction124 as Connection709
+        connect "I - Seafloor Load 24V.n_node" Junction125 as Connection710
+        connect Junction125 "Voltage - Seafloor Load 24V.p_node" as Connection711
+        connect "Lumped Seafoor Load 24V.p_node" Junction125 as Connection712
+        connect Junction123 Junction126 as Connection713
+        connect Junction126 "Voltage - Seafloor Load 24V.n_node" as Connection714
+        connect "Lumped Seafoor Load 24V.n_node" Junction126 as Connection715
+        connect "L - Seafloor Buck 24V.p_node" "Seafloor DC-DC 24V.a_out" as Connection716
+        connect Junction123 "Seafloor DC-DC 24V.b_out" as Connection717
+        connect Gain17.out Integrator6.in as Connection727
+        connect Gain16.out Sum18.in as Connection728
+        connect Integrator6.out Sum18.in1 as Connection729
+        connect Junction129 Gain16.in as Connection730
+        connect Gain17.in Junction129 as Connection731
+        connect From16 Sum17.in1 as Connection732
+        [
+            breakpoints = 10232, 8932; 10232, 8900
+        ]
+        connect From17 Sum17.in as Connection733
+        [
+            breakpoints = 10232, 8852; 10232, 8884
+        ]
+        connect Limit6.out Gain18.in as Connection734
+        connect Gain18.out Sum19.in as Connection735
+        connect Constant6.out Sum19.in1 as Connection736
+        connect Junction129 Sum17.out as Connection737
+        connect Limit6.in Sum18.out as Connection738
+        connect "Logical operator6.out" Integrator6.reset as Connection739
+        [
+            breakpoints = 10484, 9032; 10484, 8980
+        ]
+        connect "Seafloor DC-DC 24V.In" Sum19.out as Connection742
+        [
+            breakpoints = 10368, 9088; 11020, 9088; 11020, 8940
+        ]
+        connect From18 Junction130 as Connection744
+        connect Junction130 "Logical operator6.in" as Connection745
+        connect "Seafloor DC-DC 24V.En" Junction130 as Connection746
+        connect "Voltage Seafloor - Reference 24V.out" Goto15 as Connection747
+        connect "C - Seafloor Buck 5V.p_node" Junction132 as Connection756
+        connect Junction132 "L - Seafloor Buck 5V.n_node" as Connection757
+        connect "I - Seafloor Load 5V.p_node" Junction132 as Connection758
+        connect "C - Seafloor Buck 5V.n_node" Junction133 as Connection759
+        connect Goto16 Junction134 as Connection760
+        connect Junction134 "Voltage - Seafloor Load 5V.out" as Connection761
+        connect "V - Seafloor Load 5V.in" Junction134 as Connection762
+        connect "I - Seafloor Load 5V.n_node" Junction135 as Connection763
+        connect Junction135 "Voltage - Seafloor Load 5V.p_node" as Connection764
+        connect "Lumped Seafoor Load 5V.p_node" Junction135 as Connection765
+        connect Junction133 Junction136 as Connection766
+        connect Junction136 "Voltage - Seafloor Load 5V.n_node" as Connection767
+        connect "Lumped Seafoor Load 5V.n_node" Junction136 as Connection768
+        connect "L - Seafloor Buck 5V.p_node" "Seafloor DC-DC 5V.a_out" as Connection769
+        connect Junction133 "Seafloor DC-DC 5V.b_out" as Connection770
+        connect I_Floor_5V.out Integrator7.in as Connection771
+        connect P_Floor_5V.out Sum21.in as Connection772
+        connect Integrator7.out Sum21.in1 as Connection773
+        connect Junction137 P_Floor_5V.in as Connection774
+        connect I_Floor_5V.in Junction137 as Connection775
+        connect From19 Sum20.in1 as Connection776
+        [
+            breakpoints = 10232, 9540; 10232, 9508
+        ]
+        connect From20 Sum20.in as Connection777
+        [
+            breakpoints = 10232, 9460; 10232, 9492
+        ]
+        connect Limit7.out Gain21.in as Connection778
+        connect Gain21.out Sum22.in as Connection779
+        connect Constant7.out Sum22.in1 as Connection780
+        connect Junction137 Sum20.out as Connection781
+        connect Limit7.in Sum21.out as Connection782
+        connect "Logical operator7.out" Integrator7.reset as Connection783
+        [
+            breakpoints = 10484, 9640; 10484, 9588
+        ]
+        connect "Seafloor DC-DC 5V.In" Sum22.out as Connection784
+        [
+            breakpoints = 10368, 9696; 11020, 9696; 11020, 9548
+        ]
+        connect From21 Junction138 as Connection785
+        connect Junction138 "Logical operator7.in" as Connection786
+        connect "Seafloor DC-DC 5V.En" Junction138 as Connection787
+        connect "Voltage Seafloor - Reference 5V.out" Goto17 as Connection794
+        connect "Lumped Seafoor Load 12V.p_node" Junction114 as Connection813
+        connect "Lumped Seafoor Load 12V.n_node" Junction115 as Connection814
+        connect "Seafloor DC-DC 12V.a_in" Junction139 as Connection815
+        connect Junction139 R_Transmission.n_node as Connection816
+        connect Junction121 Junction140 as Connection818
+        [
+            breakpoints = 9500, 8688
+        ]
+        connect Junction140 "Seafloor DC-DC 12V.b_in" as Connection819
+        [
+            breakpoints = 9884, 8692; 9884, 8692
+        ]
+        connect "Seafloor DC-DC 24V.a_in" Junction141 as Connection821
+        connect Junction141 Junction139 as Connection822
+        connect "Seafloor DC-DC 5V.a_in" Junction141 as Connection823
+        connect "Seafloor DC-DC 24V.b_in" Junction142 as Connection824
+        connect Junction142 Junction140 as Connection825
+        connect "Seafloor DC-DC 5V.b_in" Junction142 as Connection826
+        connect "I Surface 24V.in" "I - Sea-surface Load 24V.out" as Connection827
+        connect "I - Sea-surface Load 12V.out" "I Surface 12V.in" as Connection828
+        connect "I - Sea-surface Load 5V.out" "I Surface 5V.in" as Connection829
+        connect "I Seafloor 12V.in" "I - Seafloor Load 12V.out" as Connection830
+        connect "I - Seafloor Load 24V.out" "I Seafloor 24V.in" as Connection831
+        connect "I - Seafloor Load 5V.out" "I Seafloor 5V.in" as Connection832
+    }
+
+    default {
+        "core/Capacitor" {
+            signal_access = "inherit"
+            capacitance = "1e-6"
+            initial_voltage = "0"
+            pole_shift_ignore = "False"
+            visible = "True"
+        }
+
+        "core/Constant" {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+            _tunable = "False"
+        }
+
+        "core/Gain" {
+            gain = "1"
+            multiplication = "Element-wise(K.*u)"
+            _tunable = "False"
+            execution_rate = "inherit"
+        }
+
+        "core/Inductor" {
+            signal_access = "inherit"
+            inductance = "1e-3"
+            initial_current = "0.0"
+            pole_shift_ignore = "False"
+            visible = "True"
+        }
+
+        "core/Integrator" {
+            show_reset = "none"
+            reset_type = "asynchronous"
+            show_init_condition = "internal"
+            init_value = "0"
+            limit_output = "False"
+            limit_upper = "inf"
+            limit_lower = "-inf"
+            show_state = "False"
+            state_port_type = "inherit"
+            execution_rate = "inherit"
+        }
+
+        "core/Limit" {
+            upper_limit = "[\'inf\']"
+            lower_limit = "[\'-inf\']"
+            execution_rate = "inherit"
+        }
+
+        "core/Logical operator" {
+            operator = "AND"
+            inputs = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Resistor" {
+            resistance = "1"
+            param_set = ""
+        }
+
+        "core/SCADA Input" {
+            signal_access = "inherit"
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        "core/SCADA Output" {
+            addr = "0"
+            format = "real"
+            unit = " "
+            override_signal_name = "False"
+            signal_name = ""
+            execution_rate = "inherit"
+        }
+
+        "core/Sum" {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Voltage Source" {
+            sig_input = "False"
+            type = "signal generator"
+            param_set = "1phase"
+            parent_label = ""
+            addr = "0"
+            spc_nb = "0"
+            execution_rate = "100e-6"
+            cpd_visible = "True"
+            enable_snb = "False"
+            snb_type = "R2"
+            R2 = "0.0"
+            L1 = "0.1"
+            override_signal_name = "False"
+            signal_name = ""
+            init_source_nature = "Constant"
+            init_const_value = "0.0"
+            init_rms_value = "0.0"
+            init_frequency = "50.0"
+            init_phase = "0.0"
+        }
+
+        "core/Boost" {
+            signal_access = "inherit"
+            model_type = "Global GDS oversampling"
+            ctrl_src = "Digital inputs"
+            op_mode = "Fixed carrier frequency"
+            carrier_freq = "10000.0"
+            carr_ph_offset = "0.0"
+            d_time = "5e-6"
+            ref_sig_min_max = "[-1.0, 1.0]"
+            load_mode = "on min"
+            execution_rate = "inherit"
+            S1 = "1"
+            S1_logic = "active high"
+            pwm_enabling = "False"
+            pwm_enable_di = "13"
+            pwm_enable_inv = "active high"
+            diode_pos = "upper_leg"
+            losses_estimation = "False"
+            fvd_def_method = "Voltage and Resistance"
+            Import_igbt_xml = "not selected"
+            Import_diode_xml = "not selected"
+            Vce = "1.3"
+            Rce = "0"
+            Vd = "1.2"
+            Rd = "0"
+            i_sw = "[0.0, 6.0, 12.0, 18.0, 24.0]"
+            v_sw = "[0.0, 600.0]"
+            temp_sw = "[25.0, 50.0, 75.0, 100.0, 125.0]"
+            vce_table_out = "[1.3, 1.3, 1.3, 1.3, 1.3]"
+            vd_table_out = "[1.2, 1.2, 1.2, 1.2, 1.2]"
+            et_on_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*3.8e-3, 0.4*3.8e-3, 0.8*3.8e-3, 0.68*3.8e-3, 0.9*3.8e-3], [0.65*3.8e-3, 0.9*3.8e-3, 1.2*3.8e-3, 1.5*3.8e-3, 1.7*3.8e-3], [0.9*3.8e-3, 1.3*3.8e-3, 1.7*3.8e-3, 1.9*3.8e-3, 2.25*3.8e-3], [1.1*3.8e-3, 1.7*3.8e-3, 2.1*3.8e-3, 2.3*3.8e-3, 2.5*3.8e-3]]"
+            et_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.1e-3, 0.4*2.1e-3, 0.8*2.1e-3, 0.68*2.1e-3, 0.9*2.1e-3], [0.65*2.1e-3, 0.9*2.1e-3, 1.2*2.1e-3, 1.5*2.1e-3, 1.7*2.1e-3], [0.9*2.1e-3, 1.3*2.1e-3, 1.7*2.1e-3, 1.9*2.1e-3, 2.25*2.1e-3], [1.1*2.1e-3, 1.7*2.1e-3, 2.1*2.1e-3, 2.3*2.1e-3, 2.5*2.1e-3]]"
+            ed_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.2e-3, 0.4*2.2e-3, 0.8*2.2e-3, 0.68*2.2e-3, 0.9*2.2e-3], [0.65*2.2e-3, 0.9*2.2e-3, 1.2*2.2e-3, 1.5*2.2e-3, 1.7*2.2e-3], [0.9*2.2e-3, 1.3*2.2e-3, 1.7*2.2e-3, 1.9*2.2e-3, 2.25*2.2e-3], [1.1*2.2e-3, 1.7*2.2e-3, 2.1*2.2e-3, 2.3*2.2e-3, 2.5*2.2e-3]]"
+            temp_estimation = "False"
+            thermal_networks_type = "Foster"
+            switch_Rth = "[0.159, 0.133, 0.120, 0.038]"
+            switch_Tth = "[1.1e-1, 1.56e-2, 1.35e-3, 1.51e-4]"
+            switch_Cth = "[0.0029, 0.0097, 0.1068, 0.8500]"
+            diode_Rth = "[0.159, 0.133, 0.120, 0.038]"
+            diode_Tth = "[1.1e-1, 1.56e-2, 1.35e-3, 1.51e-4]"
+            diode_Cth = "[0.0029, 0.0097, 0.1068, 0.8500]"
+            loss_exec_rate = "100e-6"
+            visualize_luts = "Visualize Lookup Tables"
+            show_monitoring = "False"
+        }
+
+        "core/Buck" {
+            signal_access = "inherit"
+            ctrl_src = "Digital inputs"
+            op_mode = "Fixed carrier frequency"
+            carrier_freq = "10000.0"
+            carr_ph_offset = "0.0"
+            d_time = "5e-6"
+            ref_sig_min_max = "[-1.0, 1.0]"
+            load_mode = "on min"
+            execution_rate = "inherit"
+            S1 = "1"
+            S1_logic = "active high"
+            pwm_enabling = "False"
+            pwm_enable_di = "13"
+            pwm_enable_inv = "active high"
+            losses_estimation = "False"
+            fvd_def_method = "Voltage and Resistance"
+            Import_igbt_xml = "not selected"
+            Import_diode_xml = "not selected"
+            Vce = "1.3"
+            Rce = "0"
+            Vd = "1.2"
+            Rd = "0"
+            i_sw = "[0.0, 6.0, 12.0, 18.0, 24.0]"
+            v_sw = "[0.0, 600.0]"
+            temp_sw = "[25.0, 50.0, 75.0, 100.0, 125.0]"
+            vce_table_out = "[1.3, 1.3, 1.3, 1.3, 1.3]"
+            vd_table_out = "[1.2, 1.2, 1.2, 1.2, 1.2]"
+            et_on_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*3.8e-3, 0.4*3.8e-3, 0.8*3.8e-3, 0.68*3.8e-3, 0.9*3.8e-3], [0.65*3.8e-3, 0.9*3.8e-3, 1.2*3.8e-3, 1.5*3.8e-3, 1.7*3.8e-3], [0.9*3.8e-3, 1.3*3.8e-3, 1.7*3.8e-3, 1.9*3.8e-3, 2.25*3.8e-3], [1.1*3.8e-3, 1.7*3.8e-3, 2.1*3.8e-3, 2.3*3.8e-3, 2.5*3.8e-3]]"
+            et_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.1e-3, 0.4*2.1e-3, 0.8*2.1e-3, 0.68*2.1e-3, 0.9*2.1e-3], [0.65*2.1e-3, 0.9*2.1e-3, 1.2*2.1e-3, 1.5*2.1e-3, 1.7*2.1e-3], [0.9*2.1e-3, 1.3*2.1e-3, 1.7*2.1e-3, 1.9*2.1e-3, 2.25*2.1e-3], [1.1*2.1e-3, 1.7*2.1e-3, 2.1*2.1e-3, 2.3*2.1e-3, 2.5*2.1e-3]]"
+            ed_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.2e-3, 0.4*2.2e-3, 0.8*2.2e-3, 0.68*2.2e-3, 0.9*2.2e-3], [0.65*2.2e-3, 0.9*2.2e-3, 1.2*2.2e-3, 1.5*2.2e-3, 1.7*2.2e-3], [0.9*2.2e-3, 1.3*2.2e-3, 1.7*2.2e-3, 1.9*2.2e-3, 2.25*2.2e-3], [1.1*2.2e-3, 1.7*2.2e-3, 2.1*2.2e-3, 2.3*2.2e-3, 2.5*2.2e-3]]"
+            temp_estimation = "False"
+            thermal_networks_type = "Foster"
+            switch_Rth = "[0.159, 0.133, 0.120, 0.038]"
+            switch_Tth = "[1.1e-1, 1.56e-2, 1.35e-3, 1.51e-4]"
+            switch_Cth = "[0.0029, 0.0097, 0.1068, 0.8500]"
+            diode_Rth = "[0.159, 0.133, 0.120, 0.038]"
+            diode_Tth = "[1.1e-1, 1.56e-2, 1.35e-3, 1.51e-4]"
+            diode_Cth = "[0.0029, 0.0097, 0.1068, 0.8500]"
+            loss_exec_rate = "100e-6"
+            visualize_luts = "Visualize Lookup Tables"
+            show_monitoring = "False"
+        }
+
+        "core/Current Measurement" {
+            signal_access = "inherit"
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+
+        "core/Single Phase Core Coupling" {
+            snb_type_i = "none"
+            R1 = "100000.0"
+            C1 = "1e-06"
+            C2 = "1e-06"
+            fixed_snb_i = "false"
+            snb_type_u = "none"
+            R2 = "0.1"
+            L1 = "0.1"
+            L2 = "0.1"
+            fixed_snb_u = "false"
+        }
+
+        "core/Single Pole Single Throw Contactor" {
+            signal_access = "inherit"
+            ctrl_src = "Digital input"
+            Sa = "1"
+            Sa_logic = "active high"
+            enable_fb_out = "False"
+            fb_out_type = "real"
+            execution_rate = "inherit"
+            initial_state = "off"
+            on_delay = "0"
+            off_delay = "0"
+            switching = "any current"
+            hide_int_meas = "False"
+        }
+
+        "core/Voltage Measurement" {
+            signal_access = "inherit"
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        # The Schematic API is imported as 'mdl'
+        # To get the model file path, use 'mdl.get_model_file_path()'
+        # To print information to the console, use info()
+        
+        # Import statements
+        import sensor_data
+        import LC_filter
+        import SCADA_load_calculations as load
+        
+        # ENERGY STORAGE / BATTERY VALUES / SOURCE
+        
+        # Custom Voltage Source
+        V_source = 48.0                 # Source or battery voltage
+        Ah_bat_source = 20.0            # Ah value for battery source
+        
+        # Battery min and max voltages; values necessary for Boost Converter
+        V_bat_min = 36.0                # Lowest battery voltage during operation
+        V_bat_max = 54.0                # Highers battery voltage during operation
+        
+        f_s = 20000.0                   # Converter frequency; seperated converter frequencies can be assigned if necessary
+        
+        # Define RL values for the subsea cable: Trans_Cable(R (Ohm), L (mH))
+        cable_resistance = 0.020
+        cable_inductance = 0.001
+        RL_surf2sea_cable = sensor_data.Trans_Cable(cable_resistance, cable_inductance)
+        
+        V_SurfaceLoad = (5.0, 12.0, 24.0)            # Voltage level for the OOB's sensor load part of the seasurface circuitry
+        V_SeafloorLoad = (5.0, 12.0, 24.0)           # Voltage level for the OOB's sensor load part of the seafloor circuitry
+        V_out_Boost = 120.0                          # Voltage level that needs to be stepped up by Boost converter to reduce transmission losses
+        
+        # SPECIFY SENSORS & SENSOR DATA
+        sensor_load = {}
+        sensor_load['CPU'] = sensor_data.Custom_User_Sensor(1, 1, 'Surface', '5V', 0)
+        sensor_load['GPS'] = sensor_data.Custom_User_Sensor(0.7, 1, 'Surface', '5V', 0)
+        sensor_load['dataLogger_communications_surface'] = sensor_data.Custom_User_Sensor(6.0, 3, 'Surface', '5V', 0)
+        sensor_load['pyranometer'] = sensor_data.Custom_User_Sensor(0.1, 1, 'Surface', '5V', 0)
+        sensor_load['ADCP'] = sensor_data.Custom_User_Sensor(20, 3, 'Surface', '12V', 0)
+        sensor_load['catalytic'] = sensor_data.Custom_User_Sensor(6.0, 1, 'Surface', '12V', 0)
+        sensor_load['ctd_surface'] = sensor_data.Custom_User_Sensor(36, 1, 'Surface', '12V', 0)
+        sensor_load['echosounder'] = sensor_data.Custom_User_Sensor(6.0, 1, 'Surface', '12V', 0)
+        sensor_load['electrode_ph'] = sensor_data.Custom_User_Sensor(1.0, 1, 'Surface', '12V', 0)
+        sensor_load['flourometer'] = sensor_data.Custom_User_Sensor(3.0, 1, 'Surface', '12V', 0)
+        sensor_load['isfet'] = sensor_data.Custom_User_Sensor(0.4, 2, 'Surface', '12V', 0)
+        sensor_load['meteorological_probe'] = sensor_data.Custom_User_Sensor(0.18, 2, 'Surface', '12V', 0)
+        sensor_load['motion_sensor'] = sensor_data.Custom_User_Sensor(4.5, 1, 'Surface', '12V', 0)
+        sensor_load['wave_sensor'] = sensor_data.Custom_User_Sensor(69.0, 1, 'Surface', '12V', 0)
+        sensor_load['optical_sensor'] = sensor_data.Custom_User_Sensor(4.44, 3, 'Surface', '12V', 0)
+        sensor_load['pco2'] = sensor_data.Custom_User_Sensor(4.0, 2, 'Surface', '12V', 0)
+        sensor_load['anemometer'] = sensor_data.Custom_User_Sensor(72.48, 3, 'Surface', '24V', 0)
+        
+        sensor_load['dataLogger_communications_floor'] = sensor_data.Custom_User_Sensor(6.0, 3, 'Floor', '5V', 0)
+        sensor_load['camera'] = sensor_data.Custom_User_Sensor(10.8, 1, 'Floor', '12V', 0)
+        sensor_load['ctd_floor'] = sensor_data.Custom_User_Sensor(36, 1, 'Floor', '12V', 0)
+        sensor_load['LED'] = sensor_data.Custom_User_Sensor(150, 1, 'Floor', '24V', 0)
+        
+        
+        # DETERMINE EQUIVALENT LOADS FOR SEA SURFACE AND SEAFLOOR SENSORS
+        Pref_user = load.sum_loads(sensor_load)
+        R_sensors = load.equivalent_loads(Pref_user)
+        
+        equivalent_load_data = load.OOB_Power(sensor_load)
+        
+        # SEA-SURFACE BUCK CONVERTER DESIGN
+        # Specify Buck converter and determine LC-filter values
+        
+        Buck_SeaSurface = {}
+        # Set values for Buck Converter Surface Loads
+        Buck_SeaSurface['Surface_5V'] = LC_filter.Buck_Converter_Specifications(V_source, V_SurfaceLoad[0], 5, 1/f_s, 0.05)
+        Buck_SeaSurface['Surface_12V'] = LC_filter.Buck_Converter_Specifications(V_source, V_SurfaceLoad[1], 5, 1/f_s, 0.05)
+        Buck_SeaSurface['Surface_24V'] = LC_filter.Buck_Converter_Specifications(V_source, V_SurfaceLoad[2], 5, 1/f_s, 0.05)
+        
+        # Determine LC filter components
+        L_Buck_SeaSurface = LC_filter.LC_filter_L_Buck(Buck_SeaSurface)
+        C_Buck_SeaSurface = LC_filter.LC_filter_C_Buck(Buck_SeaSurface, L_Buck_SeaSurface)
+        
+        # Determine PI control values
+        P_surface_5V = L_Buck_SeaSurface[0]/equivalent_load_data.R_surface_5V
+        P_surface_12V = L_Buck_SeaSurface[1]/equivalent_load_data.R_surface_12V
+        P_surface_24V = L_Buck_SeaSurface[2]/equivalent_load_data.R_surface_24V
+        I_surface_5V = 50.0
+        I_surface_12V = 50.0
+        I_surface_24V = 50.0
+        
+        
+        # SEA-SURFACE BOOST CONVERTER DESIGN
+        # Specify Boost converter and determine LC-filter values
+        
+        Boost_SeaSurface = {}
+        Delta_V = 0.2
+        Eq_Boost_Resistance = RL_surf2sea_cable.R + load.Boost_Converter_equivalent_load_config1(V_out_Boost, V_SeafloorLoad, equivalent_load_data) 
+        
+        
+        Conduction = "Discontinuous"
+        # Set values for Buck Converter Surface Loads
+        Boost_SeaSurface['Surface'] = LC_filter.Boost_Converter_Specifications(V_out_Boost, V_bat_min, V_bat_max, Delta_V, 1/f_s, Eq_Boost_Resistance, Conduction)
+        
+        # Determine LC filter components
+        L_Boost_SeaSurface = LC_filter.LC_filter_L_Boost(Boost_SeaSurface)
+        C_Boost_SeaSurface = LC_filter.LC_filter_C_Boost(Boost_SeaSurface)
+        
+        P_Boost = 160.0*L_Boost_SeaSurface[0]/Eq_Boost_Resistance
+        I_Boost = 50.0/10.0
+        
+        
+        # SEAFLOOR BUCK CONVERTER DESIGN
+        # Specify Buck converter and determine LC-filter values
+        
+        Buck_SeaFloor = {}
+        # Set values for Buck Converter Surface Loads
+        Buck_SeaFloor['SeaFloor_5V'] = LC_filter.Buck_Converter_Specifications(V_out_Boost, V_SeafloorLoad[0], 5, 1/f_s, 0.05)
+        Buck_SeaFloor['SeaFloor_12V'] = LC_filter.Buck_Converter_Specifications(V_out_Boost, V_SeafloorLoad[1], 5, 1/f_s, 0.05)
+        Buck_SeaFloor['SeaFloor_24V'] = LC_filter.Buck_Converter_Specifications(V_out_Boost, V_SeafloorLoad[2], 5, 1/f_s, 0.05)
+        
+        # Determine LC filter components
+        L_Buck_SeaFloor = LC_filter.LC_filter_L_Buck(Buck_SeaFloor)
+        C_Buck_SeaFloor = LC_filter.LC_filter_C_Buck(Buck_SeaFloor, L_Buck_SeaFloor)
+        
+        # Determine PI control values
+        P_seafloor_5V = L_Buck_SeaFloor[0]/equivalent_load_data.R_seafloor_5V
+        P_seafloor_12V = L_Buck_SeaFloor[1]/equivalent_load_data.R_seafloor_12V
+        P_seafloor_24V = L_Buck_SeaFloor[2]/equivalent_load_data.R_seafloor_24V
+        I_seafloor_5V = 50.0
+        I_seafloor_12V = 50.0
+        I_seafloor_24V = 50.0
+    ENDCODE
+}

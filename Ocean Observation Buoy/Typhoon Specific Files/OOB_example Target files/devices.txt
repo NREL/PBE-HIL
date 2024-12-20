@@ -1,0 +1,120 @@
+LcDQ9eargZAxAXy0tiwJkPOOdtVptkvk/eIken8Xb+DsXFLnvHu2Ry8QrDW9Ibz2IjXPVNJKR16izoo2XDfCsQ==
+{
+  "compilation_timestamp": "2024-12-15 02:14:55",
+  "sw_version": "2024.3",
+  "devices": [
+    {
+      "device_type": "HIL604",
+      "hw_id": "dca31d30c332b353bc5275277068ca4f3a5bd6f53c04a480bb0db5bcf1b7c2b7",
+      "serial_no": "00604-00-00145",
+      "license_expiry": "2118-08-26",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL604",
+      "hw_id": "10db7dc1514015d0e5928235987f9c83617ec6280cb1917ada1223985ac0236a",
+      "serial_no": "00604-00-00146",
+      "license_expiry": "2118-06-03",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL604",
+      "hw_id": "40d693b094bfa4268508ff158acb40d6604b4ad7cb986ad810158842489c6251",
+      "serial_no": "00604-00-00148",
+      "license_expiry": "2118-08-26",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL604",
+      "hw_id": "774057ff1886cc330f6d86de90b1edd35323287c41d11af1572f958966e7009e",
+      "serial_no": "00604-00-00238",
+      "license_expiry": "2120-03-15",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL604",
+      "hw_id": "ff15dc962cbee72852996c5c1b277f0bc6c74ca9f79f85f23072d1b1ee3ced2a",
+      "serial_no": "00604-00-00239",
+      "license_expiry": "2120-03-15",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL604",
+      "hw_id": "f85ce1fdb35c45568f81177bbad4dee987a9efb2aeee9fd0210d56c3484fb97d",
+      "serial_no": "00604-00-00240",
+      "license_expiry": "2120-03-15",
+      "maintenance_expiry": null,
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL606",
+      "hw_id": "23ffc1ff97dc731a35da02edb9ee650ea6d35a456d7c7934900ba89c1a288d5b",
+      "serial_no": "00606-02-00072",
+      "license_expiry": "2121-08-03",
+      "maintenance_expiry": "2025-08-03",
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL606",
+      "hw_id": "427048a5eaaa86e3fed0daa167eedc3c9df9a7eb87a6bcccb1fd344a60a588d0",
+      "serial_no": "00606-03-00199",
+      "license_expiry": "2122-09-08",
+      "maintenance_expiry": "2026-09-08",
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL606",
+      "hw_id": "4b13aa5dcbf10b79f7a36f1a2616730abd51a882059c3aef170dc9456047cae7",
+      "serial_no": "00606-03-00200",
+      "license_expiry": "2122-09-08",
+      "maintenance_expiry": "2026-09-08",
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL606",
+      "hw_id": "b39b3f30e1a4b248ff959f1306831ff535f2e0a7f92dce6e08a23b888bbeb662",
+      "serial_no": "00606-04-00202",
+      "license_expiry": "2122-09-08",
+      "maintenance_expiry": "2026-09-08",
+      "access_type": "Full",
+      "paralleling": "Master",
+      "not_supported": null,
+      "toolboxes": []
+    }
+  ]
+}
+-----BEGIN SIGNATURE-----
+S+o7awwUJmBeP1Asy1CApx0anTLqyrDMgx/1UbBgcoNlrm2fxOU7IiaX9BX91MCshTeABwzgsmJM67TqjnFF/oM3jEo9D/VHiLhNHvjjY22/gGMSFdU3VsVP9Q4eqa/696lSWovbBz3eeQY6wSYUOq1K4JQV+IfK/Ez2u83k2ZDYKuNNsge6WkLx9gTOfQDH6kRugllmi6gOkgSEe4Sl2y0doZaxXEDoaYqMsYgw9IubIMTHxKP9jUruNgYAjNz66BbwVnx44eBhv7C4Lqtc1+zM6NPdSVBO3ArrYHSFucThwTovwMjBrkOgrUBkVbVKRvQti/cwoymysXinH8Ge7Q==
+-----END SIGNATURE-----
