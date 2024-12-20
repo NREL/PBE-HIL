@@ -1,0 +1,808 @@
+
+<model_description>
+    <sw_version>2024.3</sw_version>
+    <hw_properties>
+        <revision>3</revision>
+        <product_id>HIL602+</product_id>
+        <configuration_id>1</configuration_id>
+        <device_ao_limit_enable>False</device_ao_limit_enable>
+        <device_id>0</device_id>
+        <spc_out_mem_size>512</spc_out_mem_size>
+        <fw_support_limit>132646674</fw_support_limit>
+        <vhil_adio_loopback>False</vhil_adio_loopback>
+    </hw_properties>
+    <sim_setup>
+        <sim_time_step>5e-07</sim_time_step>
+    </sim_setup>
+    <pesb>
+        <cell>
+            <name>Buck - Boost Charge</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>0</site>
+            <switches>
+                <cell>
+                    <name>S1</name>
+                    <weights>
+                        <cell>[1]</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+    </pesb>
+    <analog_variables>
+        <cell>
+            <name>AUV_battery.Csoc</name>
+            <address>0</address>
+            <type>voltage</type>
+            <initial_condition>35000000.0</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>L</name>
+            <address>2</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>C</name>
+            <address>1</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>S_discharge.i</name>
+            <address>14</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>AUV_battery.SOC</name>
+            <address>3</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>AUV_battery.voltage</name>
+            <address>4</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+                <previous_name>AUV_battery</previous_name>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>AUV_battery</name>
+            <address>4</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>V_charge</name>
+            <address>6</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>S_AUV.i</name>
+            <address>12</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>S_AUV_load.i</name>
+            <address>13</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I_L</name>
+            <address>9</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I_charge</name>
+            <address>10</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>I_source</name>
+            <address>11</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Vs_meas</name>
+            <address>7</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>AUV_battery.current</name>
+            <address>8</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+                <previous_name>AUV_battery.Ia1</previous_name>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>AUV_battery.Ia1</name>
+            <address>8</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Buck - Boost Charge.il</name>
+            <address>384</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Buck - Boost Charge.v1</name>
+            <address>385</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>V_C</name>
+            <address>5</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>Buck - Boost Charge.v2</name>
+            <address>386</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+            <previous_names>
+            </previous_names>
+        </cell>
+        <cell>
+            <name>V_source</name>
+            <address>33280</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 1</name>
+            <address>34816</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 2</name>
+            <address>34817</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 3</name>
+            <address>34818</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 4</name>
+            <address>34819</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 5</name>
+            <address>34820</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 6</name>
+            <address>34821</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 7</name>
+            <address>34822</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 8</name>
+            <address>34823</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 9</name>
+            <address>34824</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 10</name>
+            <address>34825</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 11</name>
+            <address>34826</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 12</name>
+            <address>34827</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 13</name>
+            <address>34828</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 14</name>
+            <address>34829</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 15</name>
+            <address>34830</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 16</name>
+            <address>34831</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </analog_variables>
+    <digital_variables>
+        <cell>
+            <name>const_0</name>
+            <address>1</address>
+            </cell>
+        <cell>
+            <name>HIL0 AO flag</name>
+            <address>8</address>
+            </cell>
+        <cell>
+            <name>HIL0 DTV flag</name>
+            <address>9</address>
+            </cell>
+        <cell>
+            <name>HIL0 Capture or Scope Trigger</name>
+            <address>16</address>
+                <previous_names>
+                        <previous_name>HIL0 Capture/Scope Trigger</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>HIL0 Capture/Scope Trigger</name>
+            <address>16</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 1</name>
+            <address>512</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 2</name>
+            <address>513</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 3</name>
+            <address>514</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 4</name>
+            <address>515</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 5</name>
+            <address>516</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 6</name>
+            <address>517</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 7</name>
+            <address>518</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 8</name>
+            <address>519</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 9</name>
+            <address>520</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 10</name>
+            <address>521</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 11</name>
+            <address>522</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 12</name>
+            <address>523</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 13</name>
+            <address>524</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 14</name>
+            <address>525</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 15</name>
+            <address>526</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 16</name>
+            <address>527</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 17</name>
+            <address>528</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 18</name>
+            <address>529</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 19</name>
+            <address>530</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 20</name>
+            <address>531</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 21</name>
+            <address>532</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 22</name>
+            <address>533</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 23</name>
+            <address>534</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 24</name>
+            <address>535</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 25</name>
+            <address>536</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 26</name>
+            <address>537</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 27</name>
+            <address>538</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 28</name>
+            <address>539</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 29</name>
+            <address>540</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 30</name>
+            <address>541</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 31</name>
+            <address>542</address>
+            </cell>
+        <cell>
+            <name>HIL0 digital input 32</name>
+            <address>543</address>
+            </cell>
+        <cell>
+            <name>Buck - Boost Charge.S1</name>
+            <address>769</address>
+                <previous_names>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Buck - Boost Charge.PWM_Modulator.BOT_1</name>
+            <address>769</address>
+                <previous_names>
+                        <previous_name>Buck - Boost Charge.PWM_Modulator_BOT_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Buck - Boost Charge.PWM_Modulator_BOT_1</name>
+            <address>769</address>
+            </cell>
+        <cell>
+            <name>Buck - Boost Charge.PWM_Modulator.TOP_1</name>
+            <address>768</address>
+                <previous_names>
+                        <previous_name>Buck - Boost Charge.PWM_Modulator_TOP_1</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>Buck - Boost Charge.PWM_Modulator_TOP_1</name>
+            <address>768</address>
+            </cell>
+        <cell>
+            <name>S_AUV.feedback</name>
+            <address>1024</address>
+                <previous_names>
+                        <previous_name>S_AUV_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>S_AUV_fb</name>
+            <address>1024</address>
+            </cell>
+        <cell>
+            <name>S_AUV_load.feedback</name>
+            <address>1025</address>
+                <previous_names>
+                        <previous_name>S_AUV_load_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>S_AUV_load_fb</name>
+            <address>1025</address>
+            </cell>
+        <cell>
+            <name>S_discharge.feedback</name>
+            <address>1026</address>
+                <previous_names>
+                        <previous_name>S_discharge_fb</previous_name>
+                    </previous_names>
+            </cell>
+        <cell>
+            <name>S_discharge_fb</name>
+            <address>1026</address>
+            </cell>
+    </digital_variables>
+    <sources>
+        <cell>
+            <name>V_source</name>
+            <type>1phase</type>
+            <address>[0]</address>
+            <unit>V</unit>
+            <init_settings>['Constant', 48.0]</init_settings>
+        </cell>
+    </sources>
+    <machines>
+    </machines>
+    <pv_panels>
+    </pv_panels>
+    <batteries>
+        <cell>
+            <name>AUV_battery</name>
+            <address>0</address>
+            <file_name>User_defined_48.0V_2.0Ah.ibt</file_name>
+            <v_sig_name>AUV_battery.Cf</v_sig_name>
+            <q_sig_name>AUV_battery.Csoc</q_sig_name>
+            <default_soc>65.0</default_soc>
+            <e_nom>48.0</e_nom>
+            <q_full>2.0</q_full>
+            <q_scale>2e-08</q_scale>
+        </cell>
+    </batteries>
+    <contactors>
+    <cell>
+        <name>S_AUV</name>
+        <type>one_phase_breaker</type>
+        <weight>0</weight>
+        <site>0</site>
+   </cell>
+    <cell>
+        <name>S_AUV_load</name>
+        <type>one_phase_breaker</type>
+        <weight>1</weight>
+        <site>0</site>
+   </cell>
+    <cell>
+        <name>S_discharge</name>
+        <type>one_phase_breaker</type>
+        <weight>2</weight>
+        <site>0</site>
+   </cell>
+    </contactors>
+    <dtsms>
+        </dtsms>
+    <analog_output_settings>
+    </analog_output_settings>
+    <digital_output_settings>
+    </digital_output_settings>
+    <dtv>
+        <spc_dtv>
+            <cell>
+                <address>0</address>
+                <fqn>Buck - Boost Charge</fqn>
+            </cell>
+        </spc_dtv>
+        <par_dtv>
+        </par_dtv>
+    </dtv>
+
+<!-- ******* SP DATA ******** -->
+
+    <model_properties>
+        <execution_rates>[[[0.0001]]]</execution_rates>
+        <sys_real_type_precision>float</sys_real_type_precision>
+        <user_real_type_precision>double</user_real_type_precision>
+        <sig_stim>off</sig_stim>
+        <update_device_time>True</update_device_time>
+    </model_properties>
+
+    <analog_variables>
+        <cell>
+            <name>Probe1</name>
+            <type>generic</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </analog_variables>
+
+<digital_variables>
+    </digital_variables>
+
+    <tunable_params>
+        <tunable_param>
+            <name>Contactor AUV-load</name>
+            <addr>[1426063616]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Contactor Discharge</name>
+            <addr>[1426063620]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>Enable</name>
+            <addr>[1426063624]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>I_out - Reference</name>
+            <addr>[1426063628]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>I_trickle - Reference</name>
+            <addr>[1426063632]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>V_out - Reference</name>
+            <addr>[1426063636]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+        <tunable_param>
+            <name>V_out - TC</name>
+            <addr>[1426063640]</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+            <size>1</size>
+            <param_type>scada input</param_type>
+            <cpu_type>user_sp_cpu</cpu_type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rate>0.0001</execution_rate>
+            <visible>True</visible>
+        </tunable_param>
+    </tunable_params>
+
+    <scada_outputs>
+        <scada_output>
+            <name>Mode</name>
+            <addr>1426063652</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V_out - Measured</name>
+            <addr>1426063656</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>I_charge - Measured</name>
+            <addr>1426063648</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>AUV_SOC - Measured</name>
+            <addr>1426063644</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+        <scada_output>
+            <name>V_source - Measured</name>
+            <addr>1426063660</addr>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_output>
+    </scada_outputs>
+
+    <dsp_monitors>
+        <monitor>
+            <type>user</type>
+            <cpu_idx>0</cpu_idx>
+            <execution_rates>[0.0001]</execution_rates>
+            <execution_rate_labels>['ER0 (0.0001)']</execution_rate_labels>
+            <timer_counters>[15999]</timer_counters>
+
+            
+        </monitor>
+    </dsp_monitors>
+
+    <sp_compiler_type>gcc</sp_compiler_type>
+
+    <streaming>
+
+
+
+     </streaming>
+
+
+</model_description>

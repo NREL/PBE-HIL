@@ -1,0 +1,1345 @@
+version = 4.2
+
+//
+// Saved by sw version: 2024.3
+//
+
+model "AUV_charging_example" {
+    configuration {
+        hil_device = "HIL602+"
+        hil_configuration_id = 1
+        simulation_method = exact
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = False
+        reset_analog_outputs_on_sim_stop = True
+        reset_analog_outputs_on_sim_stop_mode = Offset values
+        reset_digital_outputs_on_sim_stop = True
+        vhil_adio_loopback = False
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        export_ss_to_pickle = False
+        ground_scope_core = False
+        dss_num_tol = 1e-15
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
+        tunable_params = "component defined"
+        sp_compiler_type = "C compiler"
+        sig_stim = "off"
+        export_resource_list = ""
+        export_dependency_list = ""
+        excluded_resource_list = ""
+        export_out_file = ""
+        export_lock_top_level = True
+        export_encrypt_library = True
+        export_encrypt_resources = True
+        dae_solver = "BDF"
+        max_sim_step = 1e-4
+        simulation_time = 1.0
+        abs_tol = 1e-3
+        rel_tol = 1e-3
+        init_sim_step = 1e-6
+        r_on_sw = 1e-3
+        v_on_diode = 0.2
+        data_sampling_rate = 0
+        feedthrough_validation_error_level = warning
+    }
+
+    component Subsystem Root {
+        component "core/Voltage Source" V_source {
+            init_const_value = "V_source"
+        }
+        [
+            position = 7264, 8900
+            rotation = right
+        ]
+
+        component "core/Buck - Boost" "Buck - Boost Charge" {
+            carrier_freq = "f_s"
+            ctrl_src = "Internal modulator"
+            ref_sig_min_max = "[0, 1.0]"
+            signal_access = "Inherit"
+        }
+        [
+            position = 7804, 8812
+            size = 255, 127
+        ]
+
+        component "core/Resistor" R_s_source {
+            resistance = "10000"
+        }
+        [
+            position = 7396, 8900
+            rotation = right
+        ]
+
+        component "core/Current Measurement" I_source {
+        }
+        [
+            position = 7336, 8812
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Vs_meas {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 7512, 8900
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Inductor" L {
+            inductance = "L_BuckBoost"
+            signal_access = "Inherit"
+        }
+        [
+            position = 7804, 8964
+            rotation = right
+        ]
+
+        component "core/Capacitor" C {
+            capacitance = "C_BuckBoost"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8132, 9108
+            rotation = right
+        ]
+
+        component "core/Current Measurement" I_L {
+        }
+        [
+            position = 7912, 9004
+            size = 64, 32
+        ]
+
+        component "core/Resistor" R_s_C {
+            resistance = "0.001"
+        }
+        [
+            position = 8320, 9004
+        ]
+
+        component "core/Voltage Measurement" V_C {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8248, 9108
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S_discharge {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8540, 9088
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Resistor" R_discharge {
+            resistance = "150"
+        }
+        [
+            position = 8540, 9156
+            rotation = right
+        ]
+
+        component "core/Battery" AUV_battery {
+            Kdisc_I = "20.0"
+            Ke_exp = "84.0"
+            Ke_full = "116.0"
+            Kq_exp = "85.0"
+            Kq_nom = "93.5"
+            battery_type = "User defined"
+            capacity = "AUV_Ah"
+            initial_soc = "AUV_SOC"
+            nominal_voltage = "AUV_Voltage"
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9136, 9108
+            rotation = right
+            size = 64, 48
+        ]
+
+        component "core/Current Measurement" I_charge {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8624, 9004
+            size = 64, 32
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S_AUV {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8740, 9004
+            size = 64, 32
+        ]
+
+        component "core/Resistor" R_AUV {
+            resistance = "75"
+        }
+        [
+            position = 9420, 9108
+            rotation = right
+        ]
+
+        component "core/SCADA Input" Enable {
+            unit = ""
+        }
+        [
+            position = 7628, 8660
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S_AUV_load {
+            ctrl_src = "Model"
+            signal_access = "Inherit"
+        }
+        [
+            position = 9268, 9004
+            size = 64, 32
+        ]
+
+        component "core/Integrator" Integrator1 {
+            show_reset = "level"
+        }
+        [
+            position = 8036, 8508
+        ]
+
+        component "core/Sum" Sum3 {
+            signs = "+-"
+        }
+        [
+            position = 7676, 8168
+        ]
+
+        component "core/Gain" Gain1 {
+            gain = "P"
+        }
+        [
+            position = 7980, 8424
+        ]
+
+        component "core/Gain" Gain2 {
+            gain = "I"
+        }
+        [
+            position = 7924, 8500
+        ]
+
+        component "core/Sum" Sum4 {
+        }
+        [
+            position = 8140, 8432
+        ]
+
+        component "core/Limit" Limit1 {
+            lower_limit = "-1.0"
+            upper_limit = "1.0"
+        }
+        [
+            position = 8252, 8432
+        ]
+
+        component "core/Logical operator" "Logical operator1" {
+            operator = "NOT"
+        }
+        [
+            position = 7924, 8572
+        ]
+
+        component "core/Gain" Gain3 {
+            gain = "0.5"
+        }
+        [
+            position = 8348, 8432
+        ]
+
+        component "core/Sum" Sum5 {
+        }
+        [
+            position = 8460, 8440
+        ]
+
+        component "core/Constant" Constant2 {
+            value = "0.5"
+        }
+        [
+            position = 8348, 8500
+        ]
+
+        component "core/SCADA Input" "V_out - Reference" {
+            unit = ""
+        }
+        [
+            position = 7080, 8360
+        ]
+
+        component "core/SCADA Output" "V_source - Measured" {
+            unit = ""
+        }
+        [
+            position = 7616, 8932
+        ]
+
+        component "core/SCADA Output" "V_out - Measured" {
+            unit = ""
+        }
+        [
+            position = 8368, 9144
+        ]
+
+        component "core/SCADA Output" "AUV_SOC - Measured" {
+            unit = ""
+        }
+        [
+            position = 9236, 9140
+        ]
+
+        component "core/SCADA Output" "I_charge - Measured" {
+            unit = ""
+        }
+        [
+            position = 8708, 8936
+        ]
+
+        component "core/Resistor" R_s_C1 {
+            resistance = "0.001"
+        }
+        [
+            position = 8064, 9004
+        ]
+
+        component "core/Probe" Probe1 {
+        }
+        [
+            position = 8620, 8440
+        ]
+
+        component "core/Voltage Measurement" V_charge {
+            sig_output = "True"
+            signal_access = "Inherit"
+        }
+        [
+            position = 8892, 9112
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Sum" Sum6 {
+            signs = "+-"
+        }
+        [
+            position = 7668, 8328
+        ]
+
+        component "core/SCADA Input" "I_out - Reference" {
+            unit = ""
+        }
+        [
+            position = 7080, 8448
+        ]
+
+        component "core/Multiport signal switch" "Multiport signal switch1" {
+            number_of_input_terminals = "3"
+        }
+        [
+            position = 7796, 8328
+        ]
+
+        component "core/Sum" Sum7 {
+            signs = "+-"
+        }
+        [
+            position = 7660, 8488
+        ]
+
+        component "core/SCADA Input" "I_trickle - Reference" {
+            unit = ""
+        }
+        [
+            position = 7080, 8532
+        ]
+
+        component "core/Relational operator" "Relational operator1" {
+            relational_op = "<="
+        }
+        [
+            position = 7324, 7996
+        ]
+
+        component "core/SCADA Input" "V_out - TC" {
+            unit = ""
+        }
+        [
+            position = 7136, 8004
+        ]
+
+        component "core/Logical operator" "Logical operator2" {
+        }
+        [
+            position = 7456, 7824
+        ]
+
+        component "core/Product" Product1 {
+        }
+        [
+            position = 7484, 7988
+        ]
+
+        component "core/1D look-up table" "1D look-up table1" {
+            ext_mode = "Linear"
+            in_vec_x = "[1,2,3]"
+            out_vec_f_x = "[1,2,3]"
+            table_impl = "Non-equidistant"
+        }
+        [
+            position = 7864, 7808
+        ]
+
+        component "core/Sum" Sum8 {
+            signs = "3"
+        }
+        [
+            position = 7772, 7808
+        ]
+
+        component "core/Constant" Constant3 {
+            value = "3"
+        }
+        [
+            position = 7380, 7928
+        ]
+
+        component "core/Relational operator" "Relational operator2" {
+            relational_op = ">="
+        }
+        [
+            position = 7312, 7832
+        ]
+
+        component "core/Product" Product2 {
+        }
+        [
+            position = 7572, 7808
+        ]
+
+        component "core/Constant" Constant4 {
+            value = "2"
+        }
+        [
+            position = 7468, 7736
+        ]
+
+        component "core/Relational operator" "Relational operator3" {
+            relational_op = "<="
+        }
+        [
+            position = 7324, 7740
+        ]
+
+        component "core/Constant" Constant5 {
+            value = "95.0"
+        }
+        [
+            position = 7184, 7748
+        ]
+
+        component "core/Relational operator" "Relational operator4" {
+            relational_op = ">="
+        }
+        [
+            position = 7344, 7580
+        ]
+
+        component "core/Constant" Constant6 {
+            value = "95.0"
+        }
+        [
+            position = 7176, 7588
+        ]
+
+        component "core/Product" Product3 {
+        }
+        [
+            position = 7480, 7572
+        ]
+
+        component "core/Constant" Constant7 {
+        }
+        [
+            position = 7376, 7500
+        ]
+
+        component "core/SCADA Output" Mode {
+            unit = ""
+        }
+        [
+            position = 8016, 8168
+        ]
+
+        component "core/SCADA Input" "Contactor Discharge" {
+            unit = ""
+        }
+        [
+            position = 8660, 9088
+            scale = -1, 1
+        ]
+
+        component "core/SCADA Input" "Contactor AUV-load" {
+            unit = ""
+        }
+        [
+            position = 9072, 8932
+        ]
+
+        tag Goto6 {
+            value = "V_source"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7616, 8864
+            size = 60, 20
+        ]
+
+        tag Goto7 {
+            value = "I_charge"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8708, 8876
+            size = 60, 20
+        ]
+
+        tag Goto8 {
+            value = "AUV_SOC"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 9248, 9072
+            size = 60, 20
+        ]
+
+        tag From3 {
+            value = "V_out_Bat"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7504, 8208
+            size = 180, 20
+        ]
+
+        tag From4 {
+            value = "V_out - Reference"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7504, 8128
+            size = 180, 20
+        ]
+
+        tag Goto9 {
+            value = "V_out - Meas"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8372, 9072
+            size = 92, 20
+        ]
+
+        tag Goto10 {
+            value = "V_out - Reference"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7260, 8360
+            size = 180, 20
+        ]
+
+        tag Goto11 {
+            value = "tag"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7636, 8600
+            scale = -1, 1
+            size = 60, 20
+        ]
+
+        tag From5 {
+            value = "tag"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8828, 8928
+            scale = -1, 1
+            size = 60, 20
+        ]
+
+        tag Goto12 {
+            value = "V_out_Bat"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8980, 9068
+            size = 60, 20
+        ]
+
+        tag From6 {
+            value = "I_charge"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7496, 8368
+            size = 180, 20
+        ]
+
+        tag From7 {
+            value = "I_out - Reference"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7496, 8288
+            size = 180, 20
+        ]
+
+        tag Goto13 {
+            value = "I_out - Reference"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7260, 8448
+            size = 180, 20
+        ]
+
+        tag From8 {
+            value = "I_charge"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7488, 8528
+            size = 180, 20
+        ]
+
+        tag From9 {
+            value = "I_trickle - Reference"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7488, 8448
+            size = 180, 20
+        ]
+
+        tag Goto14 {
+            value = "I_trickle - Reference"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7260, 8532
+            size = 180, 20
+        ]
+
+        tag From10 {
+            value = "V_out_Bat"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7092, 7900
+            size = 180, 20
+        ]
+
+        tag From12 {
+            value = "AUV_SOC"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7184, 7696
+            size = 60, 20
+        ]
+
+        tag From13 {
+            value = "AUV_SOC"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7184, 7532
+            size = 60, 20
+        ]
+
+        junction Junction87 pe
+        [
+            position = 7396, 8812
+        ]
+
+        junction Junction88 pe
+        [
+            position = 7512, 8812
+        ]
+
+        junction Junction89 pe
+        [
+            position = 7396, 9004
+        ]
+
+        junction Junction90 pe
+        [
+            position = 7512, 9004
+        ]
+
+        junction Junction91 pe
+        [
+            position = 7804, 9004
+        ]
+
+        junction Junction92 pe
+        [
+            position = 8132, 9004
+        ]
+
+        junction Junction93 pe
+        [
+            position = 8248, 9004
+        ]
+
+        junction Junction94 pe
+        [
+            position = 8132, 9204
+        ]
+
+        junction Junction95 pe
+        [
+            position = 8248, 9204
+        ]
+
+        junction Junction96 pe
+        [
+            position = 8540, 9004
+        ]
+
+        junction Junction97 pe
+        [
+            position = 8540, 9204
+        ]
+
+        junction Junction99 pe
+        [
+            position = 9136, 9204
+        ]
+
+        junction Junction100 sp
+        [
+            position = 7796, 8660
+        ]
+
+        junction Junction101 sp
+        [
+            position = 7568, 8900
+        ]
+
+        junction Junction102 sp
+        [
+            position = 8280, 9108
+        ]
+
+        junction Junction103 sp
+        [
+            position = 9176, 9108
+        ]
+
+        junction Junction104 sp
+        [
+            position = 8624, 8936
+        ]
+
+        junction Junction105 sp
+        [
+            position = 7756, 8660
+        ]
+
+        junction Junction106 sp
+        [
+            position = 8500, 8440
+        ]
+
+        junction Junction107 pe
+        [
+            position = 9136, 9004
+        ]
+
+        junction Junction108 pe
+        [
+            position = 8892, 9004
+        ]
+
+        junction Junction109 pe
+        [
+            position = 8892, 9204
+        ]
+
+        junction Junction110 sp
+        [
+            position = 7892, 8424
+        ]
+
+        junction Junction112 sp
+        [
+            position = 7208, 7900
+        ]
+
+        junction Junction113 sp
+        [
+            position = 7940, 8168
+        ]
+
+        junction Junction114 sp
+        [
+            position = 7232, 8004
+        ]
+
+        connect V_source.p_node I_source.p_node as Connection343
+        connect I_source.n_node Junction87 as Connection345
+        connect R_s_source.p_node Junction87 as Connection347
+        connect Junction87 Junction88 as Connection348
+        connect Junction88 "Buck - Boost Charge.pos_out" as Connection349
+        connect Vs_meas.p_node Junction88 as Connection350
+        connect L.p_node "Buck - Boost Charge.a_in" as Connection351
+        connect V_source.n_node Junction89 as Connection353
+        connect R_s_source.n_node Junction89 as Connection355
+        connect Junction89 Junction90 as Connection356
+        connect Vs_meas.n_node Junction90 as Connection358
+        connect Junction90 Junction91 as Connection360
+        connect Junction91 L.n_node as Connection361
+        connect I_L.p_node Junction91 as Connection362
+        connect Junction92 C.p_node as Connection366
+        connect R_s_C.p_node Junction93 as Connection368
+        connect Junction93 Junction92 as Connection369
+        connect V_C.p_node Junction93 as Connection370
+        connect "Buck - Boost Charge.neg_out" Junction94 as Connection371
+        [
+            breakpoints = 8004, 8812; 8004, 9204
+        ]
+        connect Junction94 C.n_node as Connection372
+        [
+            breakpoints = 8132, 9204
+        ]
+        connect R_discharge.p_node S_discharge.a_out as Connection375
+        connect V_C.n_node Junction95 as Connection376
+        connect Junction95 Junction94 as Connection377
+        connect S_discharge.a_in Junction96 as Connection379
+        connect Junction96 R_s_C.n_node as Connection380
+        connect I_charge.p_node Junction96 as Connection381
+        connect R_discharge.n_node Junction97 as Connection383
+        connect Junction97 Junction95 as Connection384
+        connect I_charge.n_node S_AUV.a_in as Connection386
+        connect AUV_battery.n_node Junction99 as Connection392
+        connect R_AUV.n_node Junction99 as Connection394
+        connect R_AUV.p_node S_AUV_load.a_out as Connection396
+        connect Gain2.out Integrator1.in as Connection295
+        connect Gain1.out Sum4.in as Connection399
+        connect Integrator1.out Sum4.in1 as Connection400
+        connect From3 Sum3.in1 as Connection311
+        [
+            breakpoints = 7620, 8208; 7620, 8176
+        ]
+        connect From4 Sum3.in as Connection314
+        [
+            breakpoints = 7620, 8128; 7620, 8160
+        ]
+        connect Limit1.out Gain3.in as Connection319
+        connect Gain3.out Sum5.in as Connection320
+        connect Constant2.out Sum5.in1 as Connection322
+        connect Limit1.in Sum4.out as Connection339
+        connect Integrator1.reset "Logical operator1.out" as Connection674
+        [
+            breakpoints = 7980, 8516; 7980, 8572
+        ]
+        connect Junction100 "Buck - Boost Charge.En" as Connection676
+        connect "Logical operator1.in" Junction100 as Connection677
+        connect Goto10 "V_out - Reference.out" as Connection680
+        connect Vs_meas.out Junction101 as Connection681
+        connect Junction101 Goto6 as Connection682
+        connect "V_source - Measured.in" Junction101 as Connection683
+        connect Goto9 Junction102 as Connection684
+        connect Junction102 V_C.out as Connection685
+        connect "V_out - Measured.in" Junction102 as Connection686
+        connect Goto8 Junction103 as Connection687
+        connect Junction103 AUV_battery.out as Connection688
+        connect Goto7 Junction104 as Connection690
+        connect Junction104 I_charge.out as Connection691
+        connect "I_charge - Measured.in" Junction104 as Connection692
+        connect I_L.n_node R_s_C1.p_node as Connection693
+        connect R_s_C1.n_node Junction92 as Connection694
+        connect Enable.out Junction105 as Connection695
+        connect Junction105 Junction100 as Connection696
+        connect Goto11 Junction105 as Connection697
+        connect From5 S_AUV.ctrl_in as Connection698
+        connect "Buck - Boost Charge.In" Junction106 as Connection703
+        [
+            breakpoints = 7812, 8660; 8500, 8660
+        ]
+        connect Junction106 Sum5.out as Connection704
+        connect Probe1.in Junction106 as Connection705
+        connect AUV_battery.p_node Junction107 as Connection717
+        connect Junction107 S_AUV_load.a_in as Connection718
+        connect S_AUV.a_out Junction108 as Connection720
+        connect Junction108 Junction107 as Connection721
+        connect V_charge.p_node Junction108 as Connection722
+        connect Junction97 Junction109 as Connection723
+        connect Junction109 Junction99 as Connection724
+        connect V_charge.n_node Junction109 as Connection725
+        connect Goto12 V_charge.out as Connection726
+        connect From6 Sum6.in1 as Connection728
+        [
+            breakpoints = 7612, 8368; 7612, 8336
+        ]
+        connect From7 Sum6.in as Connection729
+        [
+            breakpoints = 7612, 8288; 7612, 8320
+        ]
+        connect Goto13 "I_out - Reference.out" as Connection730
+        connect From8 Sum7.in1 as Connection731
+        [
+            breakpoints = 7604, 8528; 7604, 8496
+        ]
+        connect From9 Sum7.in as Connection732
+        [
+            breakpoints = 7604, 8448; 7604, 8480
+        ]
+        connect Goto14 "I_trickle - Reference.out" as Connection733
+        connect Sum3.out "Multiport signal switch1.in" as Connection734
+        connect Sum6.out "Multiport signal switch1.in1" as Connection735
+        connect Sum7.out "Multiport signal switch1.in2" as Connection736
+        connect Gain1.in Junction110 as Connection737
+        connect Junction110 Gain2.in as Connection738
+        connect Sum8.out "1D look-up table1.addr" as Connection742
+        connect "Relational operator1.out" Product1.in1 as Connection744
+        connect Constant3.out Product1.in as Connection745
+        [
+            breakpoints = 7424, 7928; 7424, 7980
+        ]
+        connect From10 Junction112 as Connection750
+        connect Junction112 "Relational operator1.in" as Connection751
+        [
+            breakpoints = 7208, 7988; 7292, 7988
+        ]
+        connect "Relational operator2.in" Junction112 as Connection752
+        connect Constant4.out Product2.in as Connection753
+        [
+            breakpoints = 7512, 7736; 7512, 7788
+        ]
+        connect "Relational operator2.out" "Logical operator2.in1" as Connection755
+        connect "Logical operator2.out" Product2.in1 as Connection756
+        connect "Relational operator3.out" "Logical operator2.in" as Connection758
+        connect Constant7.out Product3.in as Connection762
+        [
+            breakpoints = 7420, 7500; 7420, 7552
+        ]
+        connect "Relational operator4.out" Product3.in1 as Connection763
+        connect "1D look-up table1.value" Junction113 as Connection765
+        [
+            breakpoints = 7940, 7808
+        ]
+        connect Junction113 "Multiport signal switch1.ctrl" as Connection766
+        [
+            breakpoints = 7940, 8168; 7796, 8168
+        ]
+        connect From12 "Relational operator3.in" as Connection780
+        connect Constant5.out "Relational operator3.in1" as Connection781
+        connect Constant6.out "Relational operator4.in1" as Connection782
+        [
+            breakpoints = 7208, 7588; 7312, 7588
+        ]
+        connect Junction110 "Multiport signal switch1.out" as Connection787
+        connect "AUV_SOC - Measured.in" Junction103 as Connection791
+        connect Junction113 Mode.in as Connection792
+        connect Product3.out Sum8.in as Connection793
+        [
+            breakpoints = 7652, 7572; 7652, 7792
+        ]
+        connect Product2.out Sum8.in1 as Connection794
+        connect Product1.out Sum8.in2 as Connection795
+        [
+            breakpoints = 7652, 7988; 7652, 7824
+        ]
+        connect "Relational operator1.in1" Junction114 as Connection797
+        connect Junction114 "Relational operator2.in1" as Connection798
+        [
+            breakpoints = 7232, 8004; 7232, 7840
+        ]
+        connect "V_out - TC.out" Junction114 as Connection799
+        connect "Relational operator4.in" From13 as Connection800
+        [
+            breakpoints = 7292, 7572; 7292, 7532
+        ]
+        connect "Contactor Discharge.out" S_discharge.ctrl_in as Connection801
+        connect S_AUV_load.ctrl_in "Contactor AUV-load.out" as Connection802
+    }
+
+    default {
+        "core/1D look-up table" {
+            in_vec_x = "np.arange(-5,6)"
+            out_vec_f_x = "np.arange(-5,6)**2"
+            table_impl = "Equidistant"
+            ext_mode = "Clip"
+            execution_rate = "inherit"
+        }
+
+        "core/Capacitor" {
+            signal_access = "inherit"
+            capacitance = "1e-6"
+            initial_voltage = "0"
+            pole_shift_ignore = "False"
+            visible = "True"
+        }
+
+        "core/Constant" {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+            _tunable = "False"
+        }
+
+        "core/Gain" {
+            gain = "1"
+            multiplication = "Element-wise(K.*u)"
+            _tunable = "False"
+            execution_rate = "inherit"
+        }
+
+        "core/Inductor" {
+            signal_access = "inherit"
+            inductance = "1e-3"
+            initial_current = "0.0"
+            pole_shift_ignore = "False"
+            visible = "True"
+        }
+
+        "core/Integrator" {
+            show_reset = "none"
+            reset_type = "asynchronous"
+            show_init_condition = "internal"
+            init_value = "0"
+            limit_output = "False"
+            limit_upper = "inf"
+            limit_lower = "-inf"
+            show_state = "False"
+            state_port_type = "inherit"
+            execution_rate = "inherit"
+        }
+
+        "core/Limit" {
+            upper_limit = "[\'inf\']"
+            lower_limit = "[\'-inf\']"
+            execution_rate = "inherit"
+        }
+
+        "core/Logical operator" {
+            operator = "AND"
+            inputs = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Multiport signal switch" {
+            number_of_input_terminals = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Probe" {
+            signal_access = "inherit"
+            addr = "0"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "generic"
+            streaming_en = "False"
+            streaming_er_idx = "0"
+            execution_rate = "inherit"
+        }
+
+        "core/Product" {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Relational operator" {
+            relational_op = "=="
+            execution_rate = "inherit"
+        }
+
+        "core/Resistor" {
+            resistance = "1"
+            param_set = ""
+        }
+
+        "core/SCADA Input" {
+            signal_access = "inherit"
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        "core/SCADA Output" {
+            addr = "0"
+            format = "real"
+            unit = " "
+            override_signal_name = "False"
+            signal_name = ""
+            execution_rate = "inherit"
+        }
+
+        "core/Sum" {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        "core/Voltage Source" {
+            sig_input = "False"
+            type = "signal generator"
+            param_set = "1phase"
+            parent_label = ""
+            addr = "0"
+            spc_nb = "0"
+            execution_rate = "100e-6"
+            cpd_visible = "True"
+            enable_snb = "False"
+            snb_type = "R2"
+            R2 = "0.0"
+            L1 = "0.1"
+            override_signal_name = "False"
+            signal_name = ""
+            init_source_nature = "Constant"
+            init_const_value = "0.0"
+            init_rms_value = "0.0"
+            init_frequency = "50.0"
+            init_phase = "0.0"
+        }
+
+        "core/Battery" {
+            signal_access = "inherit"
+            sig_output = "False"
+            lut = "False"
+            battery_type = "Lead-Acid"
+            nominal_voltage = "12.0"
+            capacity = "1.2"
+            initial_soc = "100.0"
+            execution_rate = "100e-6"
+            Ke_full = "108.0"
+            Kdisc_I = "5.0"
+            R_series = "0.25"
+            Kq_nom = "50.0"
+            Kq_exp = "0.9"
+            Ke_exp = "102.5"
+            preview = "Preview SOC Curve"
+        }
+
+        "core/Buck - Boost" {
+            signal_access = "inherit"
+            ctrl_src = "Digital inputs"
+            op_mode = "Fixed carrier frequency"
+            carrier_freq = "10000.0"
+            carr_ph_offset = "0.0"
+            d_time = "5e-6"
+            ref_sig_min_max = "[-1.0, 1.0]"
+            load_mode = "on min"
+            execution_rate = "inherit"
+            S1 = "1"
+            S1_logic = "active high"
+            pwm_enabling = "False"
+            pwm_enable_di = "13"
+            pwm_enable_inv = "active high"
+            show_monitoring = "False"
+        }
+
+        "core/Current Measurement" {
+            signal_access = "inherit"
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+
+        "core/Single Pole Single Throw Contactor" {
+            signal_access = "inherit"
+            ctrl_src = "Digital input"
+            Sa = "1"
+            Sa_logic = "active high"
+            enable_fb_out = "False"
+            fb_out_type = "real"
+            execution_rate = "inherit"
+            initial_state = "off"
+            on_delay = "0"
+            off_delay = "0"
+            switching = "any current"
+            hide_int_meas = "False"
+        }
+
+        "core/Voltage Measurement" {
+            signal_access = "inherit"
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        # The Schematic API is imported as 'mdl'
+        # To get the model file path, use 'mdl.get_model_file_path()'
+        # To print information to the console, use info()
+        
+        # Import statements
+        import LC_filter
+        
+        # ENERGY STORAGE / BATTERY VALUES / SOURCE
+        
+        # Custom AUV Battery
+        AUV_Voltage = 48.0      # V, nominal battery voltage
+        AUV_SOC = 65.0          # %, initial state of charge
+        AUV_Ah = 2.0            # Ah
+        
+        # Charging control strategy
+        V_cc = 40.0             # Constant Current
+        I_cc = 12.0
+        V_cv = 56.0             # Constant Voltage
+        I_trickle = 2.0         # Trickle-charge
+        
+        Delta_V = 0.5           # Delta for output voltage
+        
+        # AUV Charger Source
+        V_source = 48.0         # V, voltage of the dc bus
+        
+        f_s = 20000.0           # Converter frequency
+        
+        
+        # BUCK-BOOST CONVERTER
+        
+        converter = LC_filter.BuckBoost_Converter_Specifications(V_source, V_cv, V_cc, I_cc, I_trickle,
+                                                                 f_s, Delta_V)
+        
+        L_BuckBoost = LC_filter.LC_filter_L_BuckBoost(converter)
+        C_BuckBoost = LC_filter.LC_filter_C_BuckBoost(converter)
+        
+        # Determine and assign PI control values
+        
+        P = 0.0015 
+        I = 5.0 
+    ENDCODE
+}
