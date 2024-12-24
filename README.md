@@ -17,8 +17,10 @@ See the [PBE-HIL](https://github.nrel.gov/clabusch/PBE-HIL-internal/wiki) docume
 
 The PBE applications in this repository are modeled using the Typhoon HIL software. This software uses a schematic editor to build the hardware simulation model and a Supervisory Control and Data Acquisition (SCADA) panel to simulate the model with real-time user inputs. Both the schematic editor and the SCADA panel can accept user inputs from a Python interpreter. Therefore, Python scripts are developed that make it possible for the user to configure their HIL model and assign values to power electronic components or passive circuit elements. This is illustrated in the schematic below. The Python scripts also allow the user to specify generic component values that were obtained from a load and power requirement survey, as well as the functionality of specifying custom component values.
 
+
+
 <p align="center">
-<img src="https://github.com/NREL/PBE-HIL/blob/main/wiki_images/Typhoon_Python_API.png" width="500" height="250" >
+<img src="https://github.com/NREL/PBE-HIL/blob/main/wiki_images/Typhoon_Python_interpreter.png" width="500" height="250" >
 </p>
 <p align="center">
 <em>Figure 1: Schematic illustrating the functionality of the developed PBE load models using the Typhoon HIL software and Python interpreter.</em>
