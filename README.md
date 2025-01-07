@@ -56,7 +56,9 @@ Current members of the core development team include:
 
 ## Copyright and License
 
-PBE-HIL is copyright through the National Renewable Energy Laboratory. 
+PBE-HIL is copyright through the National Renewable Energy Laboratory. The software is distributed under the Revised BSD License.
+
+See [copyright and license](https://github.com/NREL/PBE-HIL/blob/main/LICENSE) for more information.
 ## Funding
 
 The development of PBE-HIL is funded by the U.S. Department of Energy’s Water Power Technologies Office. 
